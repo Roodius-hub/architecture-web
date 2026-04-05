@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.json()); 
 app.use("/admin", AdminRouter);
-app.use("users", )
+app.use("users",)
 
 app.get('/' , () => {
     response.send("server are working")
