@@ -1,12 +1,16 @@
 import {betterAuth} from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import "dotenv/config";   
 import db from "../db/db.ts"
 
 export const AuthOption = betterAuth({
+    baseURL:process.env.BETTER_AUTH_URL,
+    secret:process.env.BETTER_AUTH_SECRET,
+
     // database
-        database: prismaAdapter(db, {
+    database: prismaAdapter(db, {
             provider:'postgresql'
-        }), 
+    }), 
 
     // email and password 
     emailAndPassword:{
@@ -23,7 +27,7 @@ export const AuthOption = betterAuth({
 
     // callback for email checking
     callbacks: {
-        async SignIn({user}) {
+        async SignIn({user}:any) {
             const allowedUser = process.env.ALLOW_USER;
 
             if(user.email !== allowedUser) {

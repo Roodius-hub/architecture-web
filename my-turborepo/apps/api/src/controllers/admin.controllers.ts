@@ -1,25 +1,38 @@
-import { request, Request , Response } from "express";
-import db from "../db/db.ts";
+import { response, type NextFunction, type Request , type Response } from "express";
+import prisma from "../db/db.ts";
 import { AuthOption } from "../auth/auth.ts";
 import { S3Client , PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-
+import { filesType, parameterReqTypes } from "../types/types.ts";
+import { geturl } from "../utils/utils.ts";
+import axios from "axios";
 // login and signup
 export const loginAndSignUp = async (req:Request,res:Response) => {
     try {
-        const response = AuthOption.handler(req)
+        const url = `${req.protocol}://${req.get("host")}${req.url}`;
 
-        res.status((await response).status)
+        const init:RequestInit = {
+            method: req.method, 
+            headers: req.headers as any
+        };
 
-        const body  = (await response).text();
-        res.send(body);
+        if(req.method !== "GET" && req.method !== "HEAD") {
+            init.body = JSON.stringify(req.body);
+        }
+
+        const fetchReq = new Request(url, init);
+
+        const response = await AuthOption.handler(fetchReq)
+        const body  = await response.text();
+        res.status(response.status).send(body);
 
     } catch (error) {
         console.log(error, "Auth error");
+        res.status(500).send("Auth error");
     }
 }
 
-// client 
+// client
     const s3clinet = new S3Client({
         region:"us-east-1",
         credentials: {
@@ -28,27 +41,90 @@ export const loginAndSignUp = async (req:Request,res:Response) => {
         },
     });
 
-// put data in s3 using Presigned
-const putObject = async (filename:string, fileType:string) => {
+// PresignedUrl 
+export const GetURL = async (req:Request, res:Response, next:NextFunction) => {
+    const filename = req.body.filename as string;
+    const fileType  = req.body.fileType as string;
+
     const command = new PutObjectCommand({
-        Bucket: '',
+        Bucket: 'roodi-archi',
         Key: `/admin/jpg/${filename}`,
         ContentType: fileType,
     })
-    const url = await getSignedUrl(s3clinet, command, {expiresIn: 60})
-
-    return url
+    try {
+        const url = await getSignedUrl(s3clinet, command, {expiresIn: 60})
+        return url;    
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-const deleteData = async (filename:string) => {
+//  put logic
+export const putData = async (req:Request, res:Response) => {
+    const url = geturl();
+    console.log(url)
+
+    const title = req.body.title as string;
+    const description = req.body.description as string;
+    const details = req.body.details as string;
+    const key = req.body.key as string;
+    const time = new Date();
+    const cdn = (process.env.CDN_DOM as string) + key ;
+    const content = req.body.content as filesType
+    try {
+        
+    const notduplicate = await prisma.findUnique({
+        where:{
+            key
+        }
+    })
+
+    if (notduplicate) {
+        return res.status(400).json({msg:"This data already present"})
+    }
+
+    const post = await prisma.metaData.create({
+        data: {
+            title: title ,
+            description: description,
+            details: details, 
+            key: key,
+            time:time,
+            cdn:cdn
+        }
+    });
+
+    const contentPut = await axios.put(url.toString(), {
+            compterdata:content   
+    })
+
+    const newresponse = contentPut.data;
+    console.log(newresponse);
+
+    console.log(post);
+     return res.status(200).json({...post, response:contentPut.data})
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:"something bad Wrong"})
+    }
+
+}
+
+
+//  delete
+export const deleteData = async (req:Request, res:Response, next:NextFunction) => {
+    const filename = req.body.filename as string;
+
     const command = new DeleteObjectCommand({
-        Bucket: '', 
+        Bucket: 'roodi-archi', 
         Key:`/admin/jpg/${filename}`,
     })
-    const deleteResponse = await s3clinet.send(command);
-    console.log(deleteResponse);
-}
-
-const editData = () => {
-
+    try {
+        const deleteResponse = await s3clinet.send(command);
+        console.log(deleteData);
+        res.send(deleteData)
+    } catch(error) {
+        console.log(error);
+    }
 }

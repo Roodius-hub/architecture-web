@@ -1,22 +1,7 @@
-import {prisma} from "./client";
-import bcrypt from "bcrypt";
+import prisma from "./client";
+import { Prisma } from "./generated/prisma/client";
 
-const seed = async () => {
-    const user = await prisma.user.create({
-        data:{
-            name:"roodius",
-            email:"osmansaifi30@gmail.com",
-            password:await bcrypt.hash('roodius', 10),
-        }
-    })
 
-    console.log(user);
+const porst = () => {
+    const newpost = prisma.metaData
 }
-
-seed()
-.then( async () => {
-    await prisma.$disconnect()
-}).
-catch((e) => {
-    console.log(e)
-})

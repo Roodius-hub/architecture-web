@@ -1,9 +1,9 @@
 {
-  "name": "api",
+  "name": "@repo/api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
-  "types": "server.d.ts",
+  "main": "./src/server.ts",
+  "types": "./src/server.d.ts",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,14 +18,19 @@
     "@aws-sdk/client-s3": "^3.1024.0",
     "@aws-sdk/s3-request-presigner": "^3.1024.0",
     "@repo/db": "*",
+    "@types/axios": "^0.9.36",
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
+    "axios": "^1.14.0",
     "bcryptjs": "^3.0.3",
     "better-auth": "^1.5.6",
     "dotenv": "^16.0.3",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
   }
 }

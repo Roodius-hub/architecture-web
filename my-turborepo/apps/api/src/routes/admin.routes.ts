@@ -1,13 +1,14 @@
 import express from "express";
-import { loginAndSignUp } from "../controllers/admin.controllers.ts";
+import { deleteData, GetURL, loginAndSignUp, putData } from "../controllers/admin.controllers.ts";
 const router = express.Router();
 
 router.all('/auth/*', loginAndSignUp)
 
-router.put("/uplaod");
+router.get("/getURL", GetURL);
 
-router.delete("delete");
+router.put("/put/metadata",putData)
 
+router.delete("delete", deleteData);
 
 
 export default router;

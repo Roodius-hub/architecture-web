@@ -6,5 +6,4 @@ router.get("/data",);
 
 
 
-
 export default router;

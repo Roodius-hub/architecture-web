@@ -1,8 +1,10 @@
-import z from "zod";
 
-export const inputSchema = z.object({
-    email: z.string(),
-    password: z.string()
-})
 
-export type inputTypes = z.infer<typeof inputSchema>
+export const geturl = async () => {
+    const response = await fetch("http://localhost:3001/admin/GetURL")
+    const data = await response.json();
+    console.log(data);
+
+    return data
+}
+
