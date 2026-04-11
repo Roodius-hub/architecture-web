@@ -1,13 +1,13 @@
+import React from "react"
 import {Button} from "../../../packages/ui/src/button"
+import AnimatedLogo from "./motionedcompo/AnimatedNavbarLogo";
 
-export default function Logo(){
-    function ReDirectToLInkdin(){
-        window.open("https://www.linkedin.com/in/Roodius")
-    }
+export default function Logo({ref}:{ref:React.ReactNode}){
+    
 
     return <>
         <div className="">
-            <Button onClick={ReDirectToLInkdin} children={"Logo"}/>
+            <AnimatedLogo />
         </div>
     </>
 }

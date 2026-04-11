@@ -1,6 +1,6 @@
 "use client"
 import Logo from "./Logo"
-import AnimatedNavbar from "./motionedcompo/AnimatedNavbar"
+import AnimatedNavbarLogo from "./motionedcompo/AnimatedNavbarLogo"
 
 export default function Navbar(){
                                                             
@@ -8,31 +8,28 @@ export default function Navbar(){
         <div className="flex items-center justify-center px-8 py-5 shadow-sm bg-[#f4f4f2]">
 
       {/* Logo */}
-      <AnimatedNavbar className="text-xl font-bold tracking-wide cursor-pointer px-8">
-        <Logo />
-      </AnimatedNavbar>
-
+        <AnimatedNavbarLogo />
       {/* Menu */}
       <div className="flex items-center gap-8  text-gray-700 font-medium px-15">
 
         <div className="cursor-pointer text-sm hover:text-blue-500 transition duration-200">
-          Home
+          <i className="fa-solid fa-house"></i> Home
         </div>
 
         <div className="cursor-pointer text-md hover:text-blue-500 transition duration-200">
-          About
+         <i className="fa-solid fa-user"></i> About
         </div>
 
         <div className="cursor-pointer text-md hover:text-blue-500 transition duration-200">
-          Projects
+         <i className="fa-solid fa-layer-group"></i> Projects
         </div>
 
         <div className="cursor-pointer text-md hover:text-blue-500 transition duration-200">
-          Services
+         <i className="fa-solid fa-compass-drafting"></i> Services
         </div>
 
         <div className="cursor-pointer text-md hover:text-blue-500 transition duration-200">
-          Contact
+         <i className="fa-regular fa-envelope"></i> Contact
         </div>
 
       </div>
