@@ -43,26 +43,25 @@ export const loginAndSignUp = async (req:Request,res:Response) => {
 
 // PresignedUrl 
 export const GetURL = async (req:Request, res:Response, next:NextFunction) => {
-    const filename = req.body.filename as string;
+    const key = req.body.key as string;
     const fileType  = req.body.fileType as string;
 
     const command = new PutObjectCommand({
         Bucket: 'roodi-archi',
-        Key: `/admin/jpg/${filename}`,
+        Key: `${key}`,
         ContentType: fileType,
     })
     try {
         const url = await getSignedUrl(s3clinet, command, {expiresIn: 60})
-        return url;    
+        res.status(200).json({YourURL:url,key,fileType})
     } catch (error) {
         console.log(error);
+        res.status(500).json({msg:"Error While Generating"})
     }
 }
 
-//  put logic
+//  put metadata
 export const putData = async (req:Request, res:Response) => {
-    const url = geturl();
-    console.log(url)
 
     const title = req.body.title as string;
     const description = req.body.description as string;
@@ -70,7 +69,6 @@ export const putData = async (req:Request, res:Response) => {
     const key = req.body.key as string;
     const time = new Date();
     const cdn = (process.env.CDN_DOM as string) + key ;
-    const content = req.body.content as filesType
     try {
         
     const notduplicate = await prisma.findUnique({
@@ -93,16 +91,7 @@ export const putData = async (req:Request, res:Response) => {
             cdn:cdn
         }
     });
-
-    const contentPut = await axios.put(url.toString(), {
-            compterdata:content   
-    })
-
-    const newresponse = contentPut.data;
-    console.log(newresponse);
-
-    console.log(post);
-     return res.status(200).json({...post, response:contentPut.data})
+     return res.status(200).json({msg:"Done"})
 
     } catch (error) {
         console.log(error);
@@ -114,16 +103,16 @@ export const putData = async (req:Request, res:Response) => {
 
 //  delete
 export const deleteData = async (req:Request, res:Response, next:NextFunction) => {
-    const filename = req.body.filename as string;
+    const key = req.body.key as string;
 
     const command = new DeleteObjectCommand({
         Bucket: 'roodi-archi', 
-        Key:`/admin/jpg/${filename}`,
+        Key:`${key}`,
     })
     try {
         const deleteResponse = await s3clinet.send(command);
-        console.log(deleteData);
-        res.send(deleteData)
+        console.log(deleteResponse);
+        res.send(deleteResponse)
     } catch(error) {
         console.log(error);
     }
