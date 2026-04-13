@@ -28,31 +28,25 @@ export default function AnimatedHero() {
         alt="background"
         fill
         priority
-        className="object-cover"
+        className="object-cover hover:scale-105 transition duration-700"
+        quality={70}
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/80" />
 
       {/* Content */}
       <div className="relative text-center max-w-2xl z-10">
-        
-        <p className="text-sm tracking-widest uppercase mb-4">
-          Imaginiring Architecture 
-        </p>
-
+    
         <h1
           ref={titleRef}
-          className="hero-title text-5xl md:text-7xl  leading-tight mb-6"
+          className="hero-title    tracking-tight leading-[1.1]"
         >
-          <span className="block font-[Bungee]">Where Vision Meets Structure</span>
-          <span className="block text-xl ">We turn ideas into timeless architectural experiences.</span>
-        </h1>
-
-        <p className="text-gray-300 mb-8">
-          Minimal. Functional. Timeless.
-        </p>
-
+          <span className="block font-[clash]  font-bold text-8xl  tracking-tight leading-[1.05]">Where Vision Meets <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+    Structure
+  </span></span>
+          <span className="text-lg md:text-xl text-gray-300 font-semibold font-satoshi">We turn ideas into timeless architectural experiences.</span>
+        </h1> 
       </div>
     </section>
   );
