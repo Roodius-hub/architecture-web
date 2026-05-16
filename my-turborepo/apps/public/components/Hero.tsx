@@ -1,9 +1,9 @@
 
-import AnimatedHero from "./motionedcompo/AnimatedHero";
+// import AnimatedHero from "./motionedcompo/AnimatedHero";
 
 export default function Hero() {
 
   return <div className="">
-    <AnimatedHero />
+    {/*<AnimatedHero />*/}
   </div>
 }

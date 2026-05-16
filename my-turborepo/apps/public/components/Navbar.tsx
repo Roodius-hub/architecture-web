@@ -49,23 +49,23 @@ export default function Navbar() {
           text-gray-300 font-medium
         ">
 
-          <div onClick={() => routeAndScroll("home")} className="cursor-pointer hover:text-white transition-colors duration-200">
+          <div onClick={() => routeAndScroll("home")} className="cursor-pointer hover:text-blue-600 font-semibold transition-colors duration-200 text-black">
             Home
           </div>
 
-          <div onClick={() => routeAndScroll("about")} className="cursor-pointer hover:text-white transition-colors duration-200">
+          <div onClick={() => routeAndScroll("about")} className="cursor-pointer hover:text-blue-600 font-semibold transition-colors  duration-200 text-black">
             About
           </div>
 
-          <div onClick={() => routeAndScroll("projects")} className="cursor-pointer hover:text-white transition-colors duration-200">
+          <div onClick={() => routeAndScroll("projects")} className="cursor-pointer hover:text-blue-600 font-semibold transition-colors  duration-200 text-black">
             Projects
           </div>
 
-          <div onClick={() => routeAndScroll("services")} className="cursor-pointer hover:text-white transition-colors duration-200">
+          <div onClick={() => routeAndScroll("services")} className="cursor-pointer hover:text-blue-600 font-semibold transition-colors  duration-200 text-black">
             Services
           </div>
 
-          <div onClick={() => routeAndScroll("contact")} className="cursor-pointer hover:text-white transition-colors duration-200">
+          <div onClick={() => routeAndScroll("contact")} className="cursor-pointer hover:text-blue-600 font-semibold transition-colors  duration-200 text-black">
             Contact
           </div>
 

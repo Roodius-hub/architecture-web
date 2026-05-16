@@ -35,10 +35,16 @@ export default function RootLayout({
         <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet"></link>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#121316]`}
-      >
-        {children}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen`}
+          >              
+              <div className="fixed inset-0 -z-10 bg-[radial-gradient(#000000_1.5px,transparent_1.5px)] [background-size:24px_24px]"></div>
+              <main>
+                {children}
+              </main>
       </body>
     </html>
   );
 }
+
+
+// bg-[#121316]
