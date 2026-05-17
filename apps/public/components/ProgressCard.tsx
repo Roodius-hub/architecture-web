@@ -1,4 +1,7 @@
-export  default function ProgressCard({
+import { motion } from "framer-motion";
+import Image from "next/image";
+
+export default function ProgressCard({
   number,
   title,
   image,
@@ -14,7 +17,22 @@ export  default function ProgressCard({
         {number}
       </p>
 
-      <div
+      <motion.div
+        initial={{ rotate: rotate === "-rotate-3" ? -3 : 3 }}
+
+        animate={{ y: [0, -8, 0] }}
+
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+
+        whileHover={{
+          rotate: 0,
+          scale: 1.03,
+        }}
+
         className={`
           relative
           w-[320px]
@@ -28,15 +46,18 @@ export  default function ProgressCard({
         {/* fake tape */}
         <div className="absolute -top-3 left-10 w-20 h-6 bg-yellow-100/70 rotate-[-8deg]" />
 
-        <img
+        <Image
+         alt="image"
           src={image}
-          className="w-full h-[220px] object-cover"
+          width={220}
+          height={220}
+          className=" object-cover"
         />
 
         <h3 className="mt-4 text-xl">
           {title}
         </h3>
-      </div>
+      </motion.div>
     </div>
   );
 }

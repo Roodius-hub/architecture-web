@@ -1,8 +1,6 @@
 "use client"
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import Image from "next/image";
-import wholesketch from "../../public-img/wholesketch.jpg";
 import ProgressCard from "../ProgressCard";
 
 export default function AnimatedHero() {
@@ -21,7 +19,7 @@ export default function AnimatedHero() {
   // }, []);
 
   return (
-    <section className="relative min-h-screen bg-[#f7f3eb] overflow-hidden">
+    <section className="relative min-h-screen pt-20  bg-[#f7f3eb] overflow-hidden">
   {/* texture overlay */}
   <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.png')]" />
 
@@ -53,21 +51,21 @@ export default function AnimatedHero() {
         <ProgressCard
           number="01"
           title="Concept"
-          image="/sketch.jpg"
+          image="/newsketch.jpg"
           rotate="-rotate-3"
         />
 
         <ProgressCard
           number="02"
           title="Development"
-          image="/model.jpg"
+          image="/wholesketch.jpg"
           rotate="rotate-2"
         />
 
         <ProgressCard
           number="03"
           title="Final Form"
-          image="/final.jpg"
+          image="/sketch.jpg"
           rotate="-rotate-2"
         />
       </div>
