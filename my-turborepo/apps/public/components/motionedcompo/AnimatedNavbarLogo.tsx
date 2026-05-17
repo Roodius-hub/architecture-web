@@ -6,7 +6,9 @@ import  {motion} from "motion/react"
 
 export default function   Logo() {
   const svgRef = useRef<SVGSVGElement | null>(null);
-const text = "IMAGINING ARCHITECTURE".split("");
+// const text = "IMAGINING ARCHITECTURE".split("");
+const line1 = "IMAGINING".split("");
+const line2 = "ARCHITECTURE".split("");
 
   useEffect(() => {
     const paths = svgRef.current?.querySelectorAll("path");
@@ -37,7 +39,7 @@ const text = "IMAGINING ARCHITECTURE".split("");
     
   }, []);
 
-  return ( <div className="flex items-center justify-center ">
+  return ( <div className="flex items-center justify-center">
     <svg
       ref={svgRef}
       width="100"
@@ -51,19 +53,33 @@ const text = "IMAGINING ARCHITECTURE".split("");
       <path d="M50 40 L100 20 L150 40" stroke="black" strokeWidth="2" />
       <path d="M100 20 L100 100" stroke="black" strokeWidth="2" />
     </svg>
+ <div className="flex flex-col leading-none items-center justify-center">
+  <motion.p className="text-[10px] font-semibold tracking-[0.2em] text-black">
+    {line1.map((char, i) => (
+      <motion.span
+        key={i}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: i * 0.06 }}
+      >
+        {char}
+      </motion.span>
+    ))}
+  </motion.p>
 
-<motion.p className="text-[10px] font-satoshi font-semibold tracking-[0.2em] text-black-300 ">
-  {text.map((char, i) => (
-    <motion.span
-      key={i}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: i * 0.06 }}
-    >
-      {char}
-    </motion.span>
-  ))}
-</motion.p>
+  <motion.p className="text-[10px] font-semibold tracking-[0.2em] text-black ml-[0.2em]">
+    {line2.map((char, i) => (
+      <motion.span
+        key={i}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 + i * 0.06 }}
+      >
+        {char}
+      </motion.span>
+    ))}
+  </motion.p>
+</div>
       </div>
   );
 }

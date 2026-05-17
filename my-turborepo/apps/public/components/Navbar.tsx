@@ -3,6 +3,11 @@ import AnimatedNavbarLogo from "./motionedcompo/AnimatedNavbarLogo"
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { motion,  AnimatePresence } from "motion/react"
+import { Building2 } from "lucide-react";
+import { House } from "lucide-react";
+import { FolderKanban } from "lucide-react";
+import { PencilRuler } from "lucide-react";
+import { Send } from "lucide-react";
 
 export default function Navbar() {
   const navigate = useRouter();
@@ -35,7 +40,7 @@ export default function Navbar() {
       ">
 
         {/* Logo */}
-        <div className="
+        <div className="mr-5
           transform-gpu transition-transform duration-200 ease-out 
           hover:scale-[1.02]
         ">
@@ -49,24 +54,24 @@ export default function Navbar() {
           text-gray-300 font-medium
         ">
 
-          <div onClick={() => routeAndScroll("home")} className="cursor-pointer hover:text-blue-600 font-semibold transition-colors duration-200 text-black">
-            Home
+          <div onClick={() => routeAndScroll("home")} className="gap-1 flex items-center justify-center cursor-pointer hover:text-blue-600   font-semibold  transition-colors duration-200 text-black">
+            <House size={19}/> Home
           </div>
 
-          <div onClick={() => routeAndScroll("about")} className="cursor-pointer hover:text-blue-600 font-semibold transition-colors  duration-200 text-black">
-            About
+          <div onClick={() => routeAndScroll("about")} className="gap-1 flex items-center justify-center  cursor-pointer hover:text-blue-600  font-semibold transition-colors  duration-200 text-black">
+            <Building2 size={21}/> About
           </div>
 
-          <div onClick={() => routeAndScroll("projects")} className="cursor-pointer hover:text-blue-600 font-semibold transition-colors  duration-200 text-black">
-            Projects
+          <div onClick={() => routeAndScroll("projects")} className="gap-1 flex items-center justify-center  cursor-pointer hover:text-blue-600  font-semibold transition-colors  duration-200 text-black">
+            <FolderKanban size={18} strokeWidth={1.5} /> Projects
           </div>
 
-          <div onClick={() => routeAndScroll("services")} className="cursor-pointer hover:text-blue-600 font-semibold transition-colors  duration-200 text-black">
-            Services
+          <div onClick={() => routeAndScroll("services")} className="gap-1 flex items-center justify-center cursor-pointer hover:text-blue-600  font-semibold transition-colors  duration-200 text-black">
+            <PencilRuler size={18} strokeWidth={1.5} /> Services
           </div>
 
-          <div onClick={() => routeAndScroll("contact")} className="cursor-pointer hover:text-blue-600 font-semibold transition-colors  duration-200 text-black">
-            Contact
+          <div onClick={() => routeAndScroll("contact")} className="gap-1 flex items-center justify-center cursor-pointer hover:text-blue-600  font-semibold transition-colors  duration-200 text-black">
+            <Send size={18} strokeWidth={1.5} /> Contact
           </div>
 
         </div>
