@@ -19,22 +19,22 @@ export default function AnimatedHero() {
   // }, []);
 
   return (
-    <section className="relative min-h-screen pt-20  bg-[#f7f3eb] overflow-hidden">
+    <section className="relative min-h-screen pt-20 rounded-2xl m-10 mt-30 bg-[#f7f3eb] overflow-hidden">
   {/* texture overlay */}
   <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.png')]" />
 
-  <div className="relative z-10 max-w-10xl mx-auto px-8 py-24 grid grid-cols-2 gap-20">
+  <div className="relative z-10 max-w-7xl mx-auto px-8 py-24 grid grid-cols-2 gap-20">
     
     {/* LEFT SIDE */}
     <div>
-      <p className="tracking-[0.3em] text-sm mb-6">
+      <p className="tracking-[0.3em] text-sm font-semibold mb-6">
         IMAGINING ARCHITECTURE
       </p>
 
-      <h1 className="text-7xl leading-[0.9] font-bold">
-        SPACES <br />
-        MADE <br />
-        HUMAN
+      <h1 className="text-9xl leading-[0.9] font-bold  ">
+        SPACES <br/>
+        <span className="text-purple-700">MADE</span> <br />
+        <span className="text-transparent [-webkit-text-stroke:0.5px_black]">HUMAN</span>
       </h1>
 
       <p className="mt-8 text-black/60 max-w-md">
