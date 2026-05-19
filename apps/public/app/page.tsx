@@ -16,10 +16,10 @@ export default function Home() {
         <Hero />
     </div>
     <div>
-        <Projects/>
+      <About/>
     </div>
     <div>
-      <About/>
+        <Projects/>
     </div>
     <div>
       <Services />

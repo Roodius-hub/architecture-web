@@ -7,7 +7,7 @@ import  {motion} from "motion/react"
 export default function   Logo() {
   const svgRef = useRef<SVGSVGElement | null>(null);
 // const text = "IMAGINING ARCHITECTURE".split("");
-const line1 = "IMAGINING".split("");
+const line1 = "IMAGINERING".split("");
 const line2 = "ARCHITECTURE".split("");
 
   useEffect(() => {

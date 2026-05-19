@@ -43,7 +43,7 @@ export default function ProgressCard({
           ${rotate}
         `}
       >
-        {/* fake tape */}
+        {/* this one is fake tape */}
         <div className="absolute -top-3 left-10 w-20 h-6 bg-yellow-100/70 rotate-[-8deg]" />
 
         <Image
@@ -61,3 +61,17 @@ export default function ProgressCard({
     </div>
   );
 }
+
+
+
+
+
+/* 
+  ProgressCard
+ ├──> timeline dot
+ ├──> step number
+ └──> floating tilted image card
+      ├──> fake masking tape
+      ├──> image
+      └──> title
+*/
