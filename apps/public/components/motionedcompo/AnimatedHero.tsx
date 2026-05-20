@@ -4,19 +4,32 @@ import gsap from "gsap";
 import ProgressCard from "../ProgressCard";
 
 export default function AnimatedHero() {
-  // const titleRef = useRef(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
 
-  // useEffect(() => {
-  //   const lines = titleRef.current.querySelectorAll("span");
+    const line1 = "ARCHITECTURE"
+    const line2 = "MOTION"
+    useEffect(() => {
 
-  //   gsap.from(lines, {
-  //     y: 100,
-  //     opacity: 0,
-  //     duration: 1.2,
-  //     stagger: 0.2,
-  //     ease: "power3.out",
-  //   });
-  // }, []);
+    if (!titleRef.current) return;
+
+    const letters = titleRef.current.querySelectorAll(".letter");
+
+    gsap.fromTo(
+      letters,
+      {
+        y: 120,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.04,
+        duration: 2.2,
+        ease: "power4.out",
+      }
+    );
+
+  }, []);
 
   return (
     <section className="relative min-h-screen pt-20  rounded-2xl  mt-30 bg-[#f7f3eb] w-full">
@@ -31,11 +44,41 @@ export default function AnimatedHero() {
         IMAGINERING ARCHITECTURE
       </p>
 
-      <h1 className="text-8xl leading-[0.9] font-semibold  ">
-        ARCHITECTURE <br/>
-        <span className="text-purple-700">IN</span> <br />
-        <span className="text-transparent [-webkit-text-stroke:0.5px_black]">MOTION</span>
-      </h1>
+      <h1
+            ref={titleRef}
+            className="text-7xl leading-[0.9] font-semibold overflow-hidden"
+          >
+
+            {/* LINE 1 */}
+            <div>
+              {line1.split("").map((char, i) => (
+                <span
+                  key={i}
+                  className="letter inline-block"
+                >
+                  {char}
+                </span>
+              ))}
+            </div>
+
+            {/* LINE 2 */}
+            <div className="text-purple-700">
+              IN
+            </div>
+
+            {/* LINE 3 */}
+            <div className="text-transparent [-webkit-text-stroke:0.5px_black]">
+              {line2.split("").map((char, i) => (
+                <span
+                  key={i}
+                  className="letter inline-block"
+                >
+                  {char}
+                </span>
+              ))}
+            </div>
+
+          </h1>
 
       <p className="mt-8 text-black/60 max-w-md">
         Architecture rooted in material, atmosphere,
