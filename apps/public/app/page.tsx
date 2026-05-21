@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Services from "@/components/Services ";
 import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 
 export default function Home() {
@@ -15,7 +16,7 @@ export default function Home() {
     <div>
         <Hero />
     </div>
-    <div>
+    <div className="mt-6">
       <About/>
     </div>
     <div>
@@ -26,6 +27,9 @@ export default function Home() {
     </div>
     <div>
       <Contact />
+    </div>
+    <div>
+      <Footer />
     </div>
     </div>
   )

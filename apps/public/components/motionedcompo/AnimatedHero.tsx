@@ -40,7 +40,7 @@ export default function AnimatedHero() {
     
     {/* TEXT -> LEFT SIDE */}
     <div>
-      <p className="tracking-[0.3em] text-sm font-semibold mb-4 ml-3">
+      <p className="tracking-[0.3em]  text-sm font-semibold mb-4 ml-3">
         IMAGINERING ARCHITECTURE
       </p>
 

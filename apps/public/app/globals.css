@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
 
-body {
-  font-family: 'Space Grotesk';
-}
-
-h1, h2, .hero-text {
+/* h1, h2, .hero-text {
   font-family: 'Anton';
+} */
+
+@theme {
+  --font-bowlby: "Bowlby One", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
 }

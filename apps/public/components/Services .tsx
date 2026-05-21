@@ -7,47 +7,43 @@ import { useState } from "react";
 export default function Services() {
       const [open, setOpen] = useState<number | null>(0);
 
-     const services = [
+ const services = [
   {
-    title: "Residential Architecture",
-    description:   "Spaces designed through light proportion, and material honesty"
+    title: "House Elevation Design",
+    description: "Modern and luxury exterior elevation designs for residential homes."
+  },
+  {
+    title: "Architectural House Planning",
+    description: "Detailed floor plans and smart space planning tailored to your lifestyle."
+  },
+  {
+    title: "2D & 3D House Maps",
+    description: "Professional 2D layouts and realistic 3D visualization for projects."
   },
   {
     title: "Interior Design",
-    description: "Luxury villa",
-    cdn: "https://d1z1e76yk7p645.cloudfront.net/25445.jpg",
+    description: "Functional and elegant interior concepts for homes and villas."
   },
   {
-    title: "Concept Development",
-    description: "Minimal design",
-    cdn: "https://d1z1e76yk7p645.cloudfront.net/25445.jpg",
+    title: "Villa & Bungalow Design",
+    description: "Custom luxury villa and bungalow architecture with premium aesthetics."
   },
   {
-    title: "Space Planning",
-    description: "Classic home",
-    cdn: "https://d1z1e76yk7p645.cloudfront.net/25445.jpg",
-  },
-  {
-    title: "Renovation & Restoration",
-    description: "Urban style",
-    cdn: "https://d1z1e76yk7p645.cloudfront.net/25445.jpg",
-  },
-  {
-    title: "Sustainable Design",
-    description: "Urban style",
-    cdn: "https://d1z1e76yk7p645.cloudfront.net/25445.jpg",
+    title: "Renovation & Remodeling",
+    description: "Transforming old spaces with modern architecture and efficient layouts."
   }
 ];
 
-    return <section className="py-40 bg-[#f7f3eb]">
+    return <section id="services" className="py-30 -mt-20 bg-[#f7f3eb] rounded-2xl">
 
       <div className="max-w-6xl mx-auto px-8">
 
-        <p className="tracking-[0.3em] text-sm mb-6">
+        <p className="tracking-[0.3em] ml-3 text-sm mb-6">
           DESIGN PRACTICE
         </p>
 
-        <h2 className="text-7xl leading-[0.9] font-semibold mb-20">
+        <h2 className="text-8xl  font-semibold mb-20 font-bowlby
+                        tracking-tight uppercase leading-none">
           SERVICES
         </h2>
 
@@ -60,7 +56,13 @@ export default function Services() {
             return (
               <div
                 key={index}
-                className="border-b border-black/10"
+                className="border-b border-black/10                 border
+              border-black/10
+              hover:border-purple-700
+              hover:-translate-y-1
+              transition-all
+              duration-700"
+              
               >
 
                 {/* HEADER */}
@@ -87,8 +89,10 @@ export default function Services() {
 
                     <h3
                       className="
-                        text-4xl
-                        font-medium
+                        text-2xl
+                        font-bowlby
+                        tracking-tight uppercase leading-none
+                        font-light
                         transition
                         duration-500
                         group-hover:text-purple-700
@@ -99,7 +103,7 @@ export default function Services() {
 
                   </div>
 
-                  <span className="text-3xl text-black/40">
+                  <span className="mr-3 text-3xl text-black/40">
                     {isOpen ? "−" : "+"}
                   </span>
 
@@ -135,24 +139,6 @@ export default function Services() {
                         <p className="text-black/60 text-lg leading-relaxed">
                           {service.description}
                         </p>
-
-                        <div className="mt-8 grid grid-cols-2 gap-4">
-
-                          {services.map((item, i) => (
-                            <div
-                              key={i}
-                              className="
-                                text-black/50
-                                border-b
-                                border-black/10
-                                pb-2
-                              "
-                            >
-                              {item.description}
-                            </div>
-                          ))}
-
-                        </div>
 
                       </div>
 
