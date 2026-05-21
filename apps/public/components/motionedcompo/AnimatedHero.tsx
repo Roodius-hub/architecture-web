@@ -6,8 +6,8 @@ import ProgressCard from "../ProgressCard";
 export default function AnimatedHero() {
     const titleRef = useRef<HTMLHeadingElement>(null);
 
-    const line1 = "ARCHITECTURE"
-    const line2 = "MOTION"
+    const line1 = "Designed "
+    const line2 = "Walls"
     useEffect(() => {
 
     if (!titleRef.current) return;
@@ -46,7 +46,7 @@ export default function AnimatedHero() {
 
       <h1
             ref={titleRef}
-            className="text-7xl leading-[0.9] font-semibold overflow-hidden"
+            className="text-7xl leading-[0.9] font-bowlby font-semibold overflow-hidden"
           >
 
             {/* LINE 1 */}
@@ -63,7 +63,7 @@ export default function AnimatedHero() {
 
             {/* LINE 2 */}
             <div className="text-purple-700">
-              IN
+              Beyond 
             </div>
 
             {/* LINE 3 */}
