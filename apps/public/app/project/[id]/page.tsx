@@ -1,6 +1,15 @@
+"use client";
+
+import motion from "framer-motion";
+import Image from "next/image";
+
 export default function Page(){
-    return <h1>
-        
-         
-    </h1>
+    return ( <main>
+        <section>
+            <div>
+                <Image src={} height={} width={}/>
+            </div>    
+        </section>        
+    </main>
+    )
 }
