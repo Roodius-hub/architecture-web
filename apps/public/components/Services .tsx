@@ -39,7 +39,7 @@ export default function Services() {
       <div className="max-w-6xl mx-auto px-8">
 
         <p className="tracking-[0.3em] ml-3 text-sm mb-6">
-          DESIGN PRACTICE
+          DESIGN PRACTICES
         </p>
 
         <h2 className="text-8xl  font-semibold mb-20 font-bowlby
