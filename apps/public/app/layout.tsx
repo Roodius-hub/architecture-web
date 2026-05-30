@@ -46,7 +46,30 @@ export default function RootLayout({
       <body
         className={`antialiased relative min-h-screen`}
           >              
-              <div className="fixed inset-0 -z-10 bg-[radial-gradient(#000000_1.5px,transparent_1.5px)] [background-size:24px_24px]"></div>
+<>
+  {/* Side lines */}
+  <div className="fixed left-[12%] top-0 h-full w-px bg-stone-200" />
+  <div className="fixed right-[12%] top-0 h-full w-px bg-stone-200" />
+
+  {/* Left label */}
+  <div className="fixed left-6 top-1/2 -translate-y-1/2 -rotate-90 text-xs tracking-[0.6em] text-stone-400">
+    ARCHITECTURE
+  </div>
+
+  {/* Right dots */}
+  <div className="fixed right-0 top-0 h-full w-48 opacity-20">
+    <div className="h-full bg-[radial-gradient(#999_1px,transparent_1px)] [background-size:24px_24px]" />
+  </div>
+  <div
+  className="fixed inset-0 -z-10 opacity-5"
+  style={{
+    backgroundImage: "url('/Archi_Logo.png')",
+    backgroundRepeat: "repeat",
+    backgroundSize: "18px 18px",
+    backgroundPosition: "0 0",
+  }}
+/>
+</>
               <main>
                 {children}
               </main>

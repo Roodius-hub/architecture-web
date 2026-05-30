@@ -1,20 +1,76 @@
-"use client"
-import AnimatedNavbarLogo from "./motionedcompo/AnimatedNavbarLogo"
-import { useRouter } from "next/navigation";
+"use client";
+
+import AnimatedNavbarLogo from "./motionedcompo/AnimatedNavbarLogo";
 import { useState } from "react";
-import { motion,  AnimatePresence } from "motion/react"
-import { Building2 } from "lucide-react";
-import { House } from "lucide-react";
-import { FolderKanban } from "lucide-react";
-import { PencilRuler } from "lucide-react";
-import { Send } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+
+import {
+  House,
+  Building2,
+  FolderKanban,
+  PencilRuler,
+  Send,
+} from "lucide-react";
+
+function NavItem({
+  icon,
+  text,
+  onClick,
+}: {
+  icon: React.ReactNode;
+  text: string;
+  onClick: () => void;
+}) {
+  return (
+    <div
+      onClick={onClick}
+      className="
+      relative overflow-hidden
+      px-4 py-2
+      rounded-full
+      border border-blue-500
+      text-blue-500
+      cursor-pointer
+      group
+      "
+    >
+      {/* Animated Background */}
+      <span
+        className="
+        absolute inset-0
+        bg-black
+        origin-left
+        scale-x-0
+        transition-transform
+        duration-500
+        ease-out
+        group-hover:scale-x-100
+        "
+      />
+
+      {/* Content */}
+      <span
+        className="
+        relative z-10
+        flex items-center gap-2
+        font-semibold
+        transition-colors
+        duration-500
+        group-hover:text-white
+        "
+      >
+        {icon}
+        {text}
+      </span>
+    </div>
+  );
+}
 
 export default function Navbar() {
-  const navigate = useRouter();
-  const [open, setOpen] = useState(false); // ✅ mobile menu state
+  const [open, setOpen] = useState(false);
 
   const routeAndScroll = (id: string) => {
-    setOpen(false); // ✅ close menu on click (important for mobile)
+    setOpen(false);
 
     setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({
@@ -25,101 +81,117 @@ export default function Navbar() {
 
   return (
     <div className="fixed top-0 left-0 w-full z-50">
-
-      {/* Glass Navbar */}
-      <div className="
-        flex items-center justify-between 
+      {/* Navbar */}
+      <div
+        className="
+        flex items-center justify-between
         px-6 md:px-8 py-2
         fixed top-6 left-1/2 -translate-x-1/2 z-50
+
         rounded-full
         bg-gradient-to-b from-white/20 to-white/5
         backdrop-blur-md
         border border-white/20
-        shadow-[0_10px_40px_rgba(0,0,0,0.4)]
-        w-[90%] md:w-auto
-      ">
+        shadow-[0_10px_40px_rgba(0,0,0,0.15)]
 
+        w-[95%] md:w-auto
+      "
+      >
         {/* Logo */}
-        <div className="mr-5
-          transform-gpu transition-transform duration-200 ease-out 
-          hover:scale-[1.02]
-        ">
+        <div
+          className="
+          mr-5
+          transform-gpu
+          transition-transform
+          duration-300
+          hover:scale-[1.03]
+        "
+        >
           <AnimatedNavbarLogo />
         </div>
 
-        {/* ✅ Desktop Menu */}
-        <div className="
-          hidden md:flex 
-          items-center gap-6 md:gap-8 
-          text-gray-300 font-medium
-        ">
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-4">
+          <NavItem
+            icon={<House size={18} />}
+            text="Home"
+            onClick={() => routeAndScroll("home")}
+          />
 
-          <div onClick={() => routeAndScroll("home")} className="gap-1 flex items-center justify-center cursor-pointer hover:text-blue-600   font-semibold  transition-colors duration-200 text-black">
-            <House size={19}/> Home
-          </div>
+          <NavItem
+            icon={<Building2 size={18} />}
+            text="About"
+            onClick={() => routeAndScroll("about")}
+          />
 
-          <div onClick={() => routeAndScroll("about")} className="gap-1 flex items-center justify-center  cursor-pointer hover:text-blue-600  font-semibold transition-colors  duration-200 text-black">
-            <Building2 size={21}/> About
-          </div>
+          <NavItem
+            icon={<FolderKanban size={18} />}
+            text="Projects"
+            onClick={() => routeAndScroll("projects")}
+          />
 
-          <div onClick={() => routeAndScroll("projects")} className="gap-1 flex items-center justify-center  cursor-pointer hover:text-blue-600  font-semibold transition-colors  duration-200 text-black">
-            <FolderKanban size={18} strokeWidth={1.5} /> Projects
-          </div>
+          <NavItem
+            icon={<PencilRuler size={18} />}
+            text="Services"
+            onClick={() => routeAndScroll("services")}
+          />
 
-          <div onClick={() => routeAndScroll("services")} className="gap-1 flex items-center justify-center cursor-pointer hover:text-blue-600  font-semibold transition-colors  duration-200 text-black">
-            <PencilRuler size={18} strokeWidth={1.5} /> Services
-          </div>
-
-          <div onClick={() => routeAndScroll("contact")} className="gap-1 flex items-center justify-center cursor-pointer hover:text-blue-600  font-semibold transition-colors  duration-200 text-black">
-            <Send size={18} strokeWidth={1.5} /> Contact
-          </div>
-
+          <NavItem
+            icon={<Send size={18} />}
+            text="Contact"
+            onClick={() => routeAndScroll("contact")}
+          />
         </div>
 
-        {/* ✅ Mobile Button */}
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-white text-xl"
+          className="md:hidden text-black text-2xl"
         >
           ☰
         </button>
-
       </div>
 
-      {/* ✅ Mobile Full Screen Menu */}
-     <AnimatePresence>
+      {/* Mobile Menu */}
+      <AnimatePresence>
         {open && (
           <motion.div
-          initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "100%" }}
-        transition={{ duration: 0.3 }}
-          className="
-            absolute top-full mt-30 right-7
-            w-52
-            bg-white/10 backdrop-blur-md
-            border border-white/20
-            rounded-xl shadow-lg
-            p-4 flex flex-col gap-4
-            text-white text-sm
-          ">
+            initial={{ x: "100%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: "100%", opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="
+            fixed
+            top-24
+            right-5
 
-      <p onClick={() => routeAndScroll("home")}>Home</p>
-      <p onClick={() => routeAndScroll("about")}>About</p>
-      <p onClick={() => routeAndScroll("projects")}>Projects</p>
-      <p onClick={() => routeAndScroll("services")}>Services</p>
-      <p onClick={() => routeAndScroll("contact")}>Contact</p>
+            w-64
+            p-6
 
-      <button
-        onClick={() => setOpen(false)}
-        className="absolute top-6 right-6 text-3xl"
-      >
-        ✕
-      </button>
+            rounded-2xl
+            bg-white/20
+            backdrop-blur-xl
+            border border-white/30
+            shadow-xl
 
-    </motion.div>
-  )}
-</AnimatePresence>
+            flex flex-col gap-4
+          "
+          >
+            <button
+              onClick={() => setOpen(false)}
+              className="absolute top-3 right-4 text-xl"
+            >
+              ✕
+            </button>
+
+            <div onClick={() => routeAndScroll("home")}>Home</div>
+            <div onClick={() => routeAndScroll("about")}>About</div>
+            <div onClick={() => routeAndScroll("projects")}>Projects</div>
+            <div onClick={() => routeAndScroll("services")}>Services</div>
+            <div onClick={() => routeAndScroll("contact")}>Contact</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
