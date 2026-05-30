@@ -40,19 +40,9 @@ export default function   Logo() {
   }, []);
 
   return ( <div className="flex items-center justify-center">
-    <svg
-      ref={svgRef}
-      width="100"
-      height="60"
-      viewBox="0 0 200 120"
-      fill="none"
-    >
-      <path d="M20 100 L180 100" stroke="black" strokeWidth="2" />
-      <path d="M50 100 L50 40" stroke="black" strokeWidth="2" />
-      <path d="M150 100 L150 40" stroke="black" strokeWidth="2" />
-      <path d="M50 40 L100 20 L150 40" stroke="black" strokeWidth="2" />
-      <path d="M100 20 L100 100" stroke="black" strokeWidth="2" />
-    </svg>
+    <div className="w-[60px]">
+        <img src="./Archi_Logo.png" alt="" />
+      </div>
  <div className="flex flex-col leading-none items-center justify-center">
   <motion.p className="text-[10px] font-semibold tracking-[0.2em] text-black">
     {line1.map((char, i) => (

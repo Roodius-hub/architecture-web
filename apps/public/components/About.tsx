@@ -5,12 +5,14 @@ export default function About(){
 
 
     return <section id="about" className="py-40 px-8 bg-[#f7f3eb] rounded-2xl">
-
   <div className="max-w-7xl mx-auto grid grid-cols-2 gap-20">
-
+    
     {/* LEFT */}
     <div className="font-bowlby">
-      <p className="tracking-[0.3em] text-sm mb-6">
+      <p className="tracking-[0.3em] text-sm mb-6 flex items-center">
+        <div className="w-[60px]">
+        <img src="./Archi_Logo.png" alt="" />
+      </div>
         Ar. Manzoor Ahmad
       </p>
 
