@@ -1,11 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { useState } from "react";
 
-export default function Page() {
-    const [clicked, SetClicked] = useState(false);
+export default async function Page(
+  {
+    params,
+    searchParams,
+  } :{
+    params:Promise<{id:string}>,
+    searchParams:Promise<{
+      title?:string,
+      description?:string,
+      cdn?:string
+    }>
+  }
+) {
+
+  const {id} = await params;
+  const {title, description, cdn} = await searchParams;
+  console.log(title, description, cdn)
   return (
     <main className="min-h-screen p-8">
       <section className="max-w-5xl mx-auto">
@@ -15,17 +28,15 @@ export default function Page() {
           animate={{ opacity: 1, y: 0 }}
           className="border-2 border-black rounded-lg p-4"
         >
-          <div className="h-64 flex items-center justify-center bg-gray-100 rounded-md">
-            Project Image
-          </div>
+          <img src={cdn} className="h-64 flex items-center justify-center bg-gray-100 rounded-md" />
         </motion.div>
 
         {/* Project Details */}
         <div className="mt-8 space-y-4">
-          <h1 className="text-4xl font-bold">Parakha</h1>
+          <h1 className="text-4xl font-bold">{title}</h1>
 
           <p className="text-gray-600">
-            A brief description of the project goes here.
+            {description}
           </p>
 
           <div>

@@ -12,7 +12,7 @@ export function Card({
   return (
     <div className="group cursor-pointer">
 
-  <div className="overflow-hidden rounded-xl">
+  <div className="overflow-hidden rounded-2xl">
     <img
       src={cdn}
       width={600}

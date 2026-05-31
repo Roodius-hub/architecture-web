@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { JetBrains_Mono } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
+
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -22,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn("font-mono", jetbrainsMono.variable)}>
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap"

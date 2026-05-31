@@ -9,12 +9,12 @@ export default function About(){
     
     {/* LEFT */}
     <div className="font-bowlby">
-      <p className="tracking-[0.3em] text-sm mb-6 flex items-center">
-        <div className="w-[60px]">
+      <div className="tracking-[0.3em] text-sm mb-6 flex items-center">
+        <p className="w-15">
         <img src="./Archi_Logo.png" alt="" />
-      </div>
-        Ar. Manzoor Ahmad
       </p>
+        Ar. Manzoor Ahmad
+      </div>
 
       <h2 className="text-7xl leading-[0.9] font-bold">
         DESIGNED <br/>
