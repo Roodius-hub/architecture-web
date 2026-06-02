@@ -21,12 +21,13 @@ model Admin {
 }
 
 model MetaData {
-  id            Int  @id @default(autoincrement())
-  CDN           String
-  Type          String
-  Title         String @unique
-  Description   String
-  Details       String
-  key           String    @unique
-  Time          DateTime
+  id                    Int  @id @default(autoincrement())
+  CDN                   String
+  Type                  String
+  Title                 String @unique
+  overview              String
+  TechnicalDetails      String
+  ProjectFacts          String[]
+  key                   String    @unique
+  Time                  DateTime
 }
