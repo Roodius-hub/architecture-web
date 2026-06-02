@@ -1,13 +1,24 @@
-import { useState } from 'react'
-import './App.css'
-function App() {
-  const [count, setCount] = useState(0)
+import { authClient } from "./lib/auth-client";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import ImageUploadForm from "./pages/Upload";
 
-  return (
-   <>
-   
-   </>
-  )
+export default function App() {
+  // const { data: session, isPending } =
+  //   authClient.useSession();
+
+  // if (isPending) return <p>Loading...</p>;
+
+  // if (!session) {
+  //   return <Login />;
+  // }
+
+  return <>
+  <div>
+    <Dashboard />
+  </div>
+  <div>
+    <ImageUploadForm />
+  </div>
+  </>;
 }
-
-export default App

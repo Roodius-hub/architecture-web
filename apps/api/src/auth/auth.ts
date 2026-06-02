@@ -17,14 +17,6 @@ export const AuthOption = betterAuth({
         enabled:true
     },
 
-    // google auth
-    socialProviders: {
-        google: {
-            clientId: process.env.CLIENT_ID as string, 
-            clientSecret: process.env.CLIENT_SECRET as string
-        }
-    }, 
-
     // callback for email checking
     callbacks: {
         async SignIn({user}:any) {
