@@ -5,7 +5,7 @@ import { S3Client , PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/clien
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { filesType, parameterReqTypes } from "../types/types.ts";
 import { geturl } from "../utils/utils.ts";
-import axios from "axios";
+import axios, { all } from "axios";
 // login and signup
 export const loginAndSignUp = async (req:Request,res:Response) => {
     try {
@@ -43,21 +43,25 @@ export const loginAndSignUp = async (req:Request,res:Response) => {
 
 // PresignedUrl 
 export const GetURL = async (req:Request, res:Response, next:NextFunction) => {
-    const key = req.body.key as string;
-    const fileType  = req.body.fileType as string;
+    const keys = req.body.keys as string[];
+    const AllImagesTitle = req.body.AllImagesTitle as string[];
+    const fileTypes  = req.body.fileTypes as string[];
 
-    const command = new PutObjectCommand({
-        Bucket: 'roodi-archi',
-        Key: `${key}`,
-        ContentType: fileType,
-    })
-    try {
+    const urls = await Promise.all(
+        keys.map(async (key, index) => {
+            const command = new PutObjectCommand({
+                Bucket: 'roodi-archi',
+                Key: `${AllImagesTitle[index]}/${key}`,
+                ContentType: fileTypes[index],
+        });
+        
         const url = await getSignedUrl(s3clinet, command, {expiresIn: 60})
-        res.status(200).json({YourURL:url,key,fileType})
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({msg:"Error While Generating"})
-    }
+        return url;
+        // console.log(error);
+    })
+    )
+    res.status(200).json({AllSignedURL:urls,Allkeys:keys,AllfileTypes:fileTypes})
+    res.status(500).json({msg:"Error While Generating"})
 }
 
 //  put metadata

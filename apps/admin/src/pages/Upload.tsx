@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Input from "./Input";
-import { UploadProject } from "../lib/Upload";
+import { UploadProjectMetaData, UploadProjectsImages } from "../lib/Upload";
+import { metaData } from "../lib/types";
+
 export default function Upload() {
   const [Designfile, SetDesignFile] = useState<File | null>(null);
   const [DrawingFile,SetDrawingFile ] = useState<File | null>(null);
@@ -19,13 +21,13 @@ export default function Upload() {
   // saving data into formdata
   const handleSave = async () => {
     const newForm = new FormData();
-    newForm.append("Title", title);
-    newForm.append('Overview', overview);
-    newForm.append('Technical Details', TechnicalDetail);
-    newForm.append('Area', area);
-    newForm.append('SiteArea', Sitearea);
-    newForm.append('status', status);
-    newForm.append('Duration', Duration);
+    // newForm.append("Title", title);
+    // newForm.append('Overview', overview);
+    // newForm.append('Technical Details', TechnicalDetail);
+    // newForm.append('Area', area);
+    // newForm.append('SiteArea', Sitearea);
+    // newForm.append('status', status);
+    // newForm.append('Duration', Duration);
 
     if (Designfile) {
       newForm.append("DesignFile", Designfile);
@@ -42,10 +44,12 @@ export default function Upload() {
     if (VisualizationFile) {
       newForm.append("Visualization", VisualizationFile);
     }
-
-    await UploadProject(newForm);
-
+    setTimeout(async () => {
+    await UploadProjectsImages(newForm);
+    }, 2000)
+    await UploadProjectMetaData({title, overview, TechnicalDetail, area, Sitearea, status, Duration})
   }
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#808080] p-4 font-mono">
