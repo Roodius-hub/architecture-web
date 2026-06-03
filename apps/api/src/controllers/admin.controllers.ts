@@ -44,14 +44,14 @@ export const loginAndSignUp = async (req:Request,res:Response) => {
 // PresignedUrl 
 export const GetURL = async (req:Request, res:Response, next:NextFunction) => {
     const keys = req.body.keys as string[];
-    const AllImagesTitle = req.body.AllImagesTitle as string[];
+    const title = req.body.title as string;
     const fileTypes  = req.body.fileTypes as string[];
 
     const urls = await Promise.all(
         keys.map(async (key, index) => {
             const command = new PutObjectCommand({
                 Bucket: 'roodi-archi',
-                Key: `${AllImagesTitle[index]}/${key}`,
+                Key: `${title}/${key}`,
                 ContentType: fileTypes[index],
         });
         
@@ -66,42 +66,53 @@ export const GetURL = async (req:Request, res:Response, next:NextFunction) => {
 
 //  put metadata
 export const putData = async (req:Request, res:Response) => {
-
-    const title = req.body.title as string;
-    const description = req.body.description as string;
-    const details = req.body.details as string;
-    const key = req.body.key as string;
-    const time = new Date();
-    const cdn = (process.env.CDN_DOM as string) + key ;
     try {
-        
-    const notduplicate = await prisma.findUnique({
+         const title = req.body.title as string;
+    const OverView = req.body.OverView  as string;
+    const technicaldetails = req.body.echnicaldetails as string;
+    const AllImagesKeysNames = req.body.AllImagesKeysNames as string[];
+    const ProjectFacts = req.body.ProjectFacts as string[]; 
+    const time = new Date();
+
+
+    // checking duplicates
+    const duplicate = await prisma.metaData.findMany({
         where:{
-            key
+            key: {
+                in: AllImagesKeysNames
+            }
         }
     })
 
-    if (notduplicate) {
-        return res.status(400).json({msg:"This data already present"})
+    if (duplicate.length > 0) {
+        return res.status(400).json({msg:"This data already present", duplicate})
     }
 
-    const post = await prisma.metaData.create({
-        data: {
-            title: title ,
-            description: description,
-            details: details, 
-            key: key,
-            time:time,
-            cdn:cdn
-        }
-    });
-     return res.status(200).json({msg:"Done"})
+    // promise
+    const posts = await Promise.all(
+        
+        AllImagesKeysNames.map(async (key, index) => {
+        const cdn = (process.env.CDN_DOM as string) + key ; 
 
+        const post = await prisma.metaData.createMany({
+            data: {
+                title: title ,
+                description: OverView,
+                details: technicaldetails, 
+                key: key,
+                time:time,
+                cdn:cdn
+            }
+        });
+      })
+    )
+        return res.status(200).json({"posts":posts})
+   
     } catch (error) {
         console.log(error);
         res.status(500).json({message:"something bad Wrong"})
+    
     }
-
 }
 
 
