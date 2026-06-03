@@ -68,18 +68,18 @@ export const GetURL = async (req:Request, res:Response, next:NextFunction) => {
 export const putData = async (req:Request, res:Response) => {
     try {
          const title = req.body.title as string;
-    const OverView = req.body.OverView  as string;
-    const technicaldetails = req.body.echnicaldetails as string;
-    const AllImagesKeysNames = req.body.AllImagesKeysNames as string[];
-    const ProjectFacts = req.body.ProjectFacts as string[]; 
-    const time = new Date();
+         const OverView = req.body.OverView  as string;
+         const technicaldetails = req.body.echnicaldetails as string;
+         const keys = req.body.keys as string[];
+         const ProjectFacts = req.body.ProjectFacts as string[]; 
+         const time = new Date();
 
 
     // checking duplicates
     const duplicate = await prisma.metaData.findMany({
         where:{
             key: {
-                in: AllImagesKeysNames
+                in: keys
             }
         }
     })
@@ -88,25 +88,21 @@ export const putData = async (req:Request, res:Response) => {
         return res.status(400).json({msg:"This data already present", duplicate})
     }
 
-    // promise
-    const posts = await Promise.all(
-        
-        AllImagesKeysNames.map(async (key, index) => {
-        const cdn = (process.env.CDN_DOM as string) + key ; 
 
-        const post = await prisma.metaData.createMany({
+        const cdn = (process.env.CDN_DOM as string) + title;
+
+        const post = await prisma.metaData.create({
             data: {
                 title: title ,
                 description: OverView,
                 details: technicaldetails, 
-                key: key,
+                ProjectFacts: ProjectFacts,
+                key: keys,
                 time:time,
-                cdn:cdn
+                cdn:cdn  
             }
         });
-      })
-    )
-        return res.status(200).json({"posts":posts})
+        return res.status(200).json({"posts":post})
    
     } catch (error) {
         console.log(error);
@@ -118,11 +114,12 @@ export const putData = async (req:Request, res:Response) => {
 
 //  delete
 export const deleteData = async (req:Request, res:Response, next:NextFunction) => {
+    const title = req.body.title  as string;
     const key = req.body.key as string;
 
     const command = new DeleteObjectCommand({
         Bucket: 'roodi-archi', 
-        Key:`${key}`,
+        Key:`${title}`,
     })
     try {
         const deleteResponse = await s3clinet.send(command);

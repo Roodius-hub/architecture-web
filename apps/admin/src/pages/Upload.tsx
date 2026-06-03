@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "./Input";
-import { UploadProjectMetaData, UploadProjectsImages } from "../lib/Upload";
-import { metaData } from "../lib/types";
+// import { UploadProjectMetaData, UploadProjectsImages } from "../lib/Upload";
+// import { metaData } from "../lib/types";
 
 export default function Upload() {
   const [Designfile, SetDesignFile] = useState<File | null>(null);
