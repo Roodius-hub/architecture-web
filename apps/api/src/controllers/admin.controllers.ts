@@ -4,8 +4,10 @@ import { AuthOption } from "../auth/auth.ts";
 import { S3Client , PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { filesType, parameterReqTypes } from "../types/types.ts";
-import { geturl } from "../utils/utils.ts";
-import axios, { all } from "axios";
+// import { geturl } from "../utils/utils.ts";
+// import axios, { all } from "axios";
+import {randomUUID} from "crypto" 
+
 // login and signup
 export const loginAndSignUp = async (req:Request,res:Response) => {
     try {
@@ -49,9 +51,10 @@ export const GetURL = async (req:Request, res:Response, next:NextFunction) => {
 
     const urls = await Promise.all(
         keys.map(async (key, index) => {
+            const extension = key.split(".").pop();
             const command = new PutObjectCommand({
                 Bucket: 'roodi-archi',
-                Key: `${title}/${key}`,
+                Key: `${title}/${randomUUID()}.${extension}`,
                 ContentType: fileTypes[index],
         });
         
