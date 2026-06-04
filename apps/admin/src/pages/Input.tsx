@@ -17,7 +17,8 @@ export default function Input({label ,onChange}:InputProps) {
 
               <div className="bg-[#d4d0c8] border-2 border-dashed border-gray-600 p-3">
                 <input onChange={(e) => {
-                    e.target.files?.[0] ?? null
+                   const file = e.target.files?.[0] ?? null;
+                    onChange(file)
                 }} 
                   type="file"
                   className="

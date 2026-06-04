@@ -1,11 +1,12 @@
 export interface metaData {
-    title:String;
-    overview:String;
-    TechnicalDetail:String;
-    area:String; 
-    Sitearea:String;
-    status:String;
-    Duration:String;
+    title:string;
+    overview:string;
+    TechnicalDetails:string;
+    area:string; 
+    Sitearea:string;
+    status:string;
+    Duration:string;
+    keys:string[];
 }
 
 

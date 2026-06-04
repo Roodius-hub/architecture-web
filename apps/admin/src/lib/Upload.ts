@@ -1,65 +1,76 @@
 import axios from "axios";
 import type { metaData } from "./types";
-import type { PayloadTypes } from "./types";
+// import type { PayloadTypes } from "./types";
+// import type { AnyCnameRecord } from "dns";
 
-const GetUrl = async (newForm:FormData, title:string) => {
-    const payload:PayloadTypes = {
-        title,
-        keys: [], 
-        fileTypes:[]
-    }
-
-    newForm.forEach((value) => {
+const GetUrl = async (files:any, title:string) => {
+    
+       const keys:string[] = [];
+        const fileTypes:string[] = [];
+    
+    files.forEach((value:any) => {
+        console.log(value);
         if (value instanceof File) {
-            payload.keys.push(value.name);
-            payload.fileTypes.push(value.type);
+            keys.push(value.name);
+            // console.log(keys)
+            fileTypes.push(value.type);
         }
     })
 
-    console.log(payload);
+    console.log(keys,fileTypes);
 
-    const response = await axios.put("http://localhost:3000/admin/getURL", payload)
-    const jsonData = response.data;
-    return jsonData;
+    const response = await axios.put("http://localhost:3000/admin/getURL", {
+        keys,
+        title,
+        fileTypes
+    })
+    // const jsonData = response.data;
+    console.log(response.data)
+    return response.data;
 }
 
-const keys : String[] = [];
 
-export async function UploadProjectMetaData({title, overview, TechnicalDetail, area, Sitearea, status, Duration}:metaData) {
+
+export async function UploadProjectMetaData({title, overview, TechnicalDetails, area, Sitearea, status, Duration ,keys}:metaData) {
     const ProjectFacts = [area, Sitearea, status, Duration];
     const response =  await axios.post("http://localhost:3000/admin/metadata", {
-        title, 
-        overview,
-        TechnicalDetail,
-        ProjectFacts,
-        keys,
+        title:title,
+        overview:overview,  
+        TechnicalDetails:TechnicalDetails,  
+        ProjectFacts:ProjectFacts,
+        keys:keys
     })
 
     const jsonData = response.data
     console.log(jsonData);
+    return jsonData;
 }
 
-export async function UploadProjectsImages(newForm:FormData, title:string) {
-    const Allurls = await GetUrl(newForm, title);
-    const files:File[] = [];
-    console.log(Allurls);
+export async function UploadProjectsImages(files:any, title:string) {
+    const Allurls = (await GetUrl(files, title)).urls;
+    // const files:File[] = [];
+    const keys : string[] = [];
+    // console.log(Allurls);
     // All files in Files Array
-    newForm.forEach((value) => {
-        if (value instanceof File) {
-            files.push(value);
-        }
-    })
+    // newForm.forEach((value) => {
+    //     if (value instanceof File) {
+    //         files.push(value);
+    //     }
+    // });
 
-    await Promise.all(
-        Allurls.map((url:string, index:number) => {
-            keys.push(url.Imagekey);
-            console.log(url.Imagekey);
-            axios.put(url, files[index], {
+    const res = await Promise.all(
+        Allurls.map(async (item:any, index:number) => {
+            keys.push(item.Imagekey);
+            console.log(item.Imagekey);
+           const upload = await axios.put(item.url, files[index], {
                 headers: {
                     "Content-Type" : files[index].type
                 }
             })
+            console.log(upload);
         })
     )
-
+    console.log(keys)
+    return keys
+    
 }

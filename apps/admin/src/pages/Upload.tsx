@@ -15,7 +15,7 @@ export default function Upload() {
 
   const [title, SetTitle] = useState<string>("");
   const [overview, SetOverview] = useState<string>("");
-  const [TechnicalDetail, SetTechnicalDetail] = useState<string>("");
+  const [TechnicalDetails, SetTechnicalDetail] = useState<string>("");
 
   const [area, SetArea] = useState<string>("");
   const [Sitearea, SetSiteSetArea] = useState<string>("");
@@ -26,45 +26,56 @@ export default function Upload() {
   const [upload, SetUpload] = useState<boolean>(false);
 
   console.log(area , Sitearea, status, Duration);
-  const newForm = new FormData();
+
+  const files = [
+  Designfile,
+  DrawingFile,
+  ProcessFile,
+  VisualizationFile
+].filter(Boolean) as File[];
   // saving data into formdata
   const handleSave = async () => {
-    if (Designfile) {
-      newForm.append("DesignFile", Designfile);
-      newForm.append("name", Designfile.name);
-      newForm.append("types", Designfile.type);
-    }
+  // const newForm = new FormData();
 
-    if (DrawingFile) {
-      newForm.append("DesignFile", DrawingFile);
-      newForm.append("name", DrawingFile.name);
-      newForm.append("type", DrawingFile.type);
-    }
+  //   if (Designfile) {
+  //     newForm.append("DesignFile", Designfile);
+  //     newForm.append("name", Designfile.name);
+  //     newForm.append("types", Designfile.type);
+  //   }
 
-    if (ProcessFile) {
-      newForm.append("ProcessFile", ProcessFile);
-      newForm.append("name", ProcessFile.name);
-      newForm.append("type", ProcessFile.type);
-    }
+  //   if (DrawingFile) {
+  //     newForm.append("DesignFile", DrawingFile);
+  //     newForm.append("name", DrawingFile.name);
+  //     newForm.append("type", DrawingFile.type);
+  //   }
 
-    if (VisualizationFile) {
-      newForm.append("Visualization", VisualizationFile);
-      newForm.append("name", VisualizationFile  .name);
-      newForm.append("type", VisualizationFile.type);
-    }
-    console.log(newForm);
+  //   if (ProcessFile) {
+  //     newForm.append("ProcessFile", ProcessFile);
+  //     newForm.append("name", ProcessFile.name);
+  //     newForm.append("type", ProcessFile.type);
+  //   }
+
+  //   if (VisualizationFile) {
+  //     newForm.append("Visualization", VisualizationFile);
+  //     newForm.append("name", VisualizationFile  .name);
+  //     newForm.append("type", VisualizationFile.type);
+  //   }
+  //   console.log(newForm);
     await new Promise((resolve) => {
       setTimeout(resolve,3000);
     })
+      console.log("FILES: ", files);
+
     SetSave(true);
   }
 
   const uploadForm = async () => {
     try {
-      const response1 = await UploadProjectMetaData({title, overview, TechnicalDetail, area, Sitearea, status, Duration});
-      const response2 = await UploadProjectsImages(newForm, title);
+      const keys = await UploadProjectsImages(files, title);
+      console.log(keys);
+
+      const response1 = await UploadProjectMetaData({title, overview, TechnicalDetails, area, Sitearea, status, Duration,keys});
       console.log(response1);
-      console.log(response2);
       SetUpload(true)
     } catch(error) {
         console.log("Upload Faidled", error);
@@ -89,7 +100,7 @@ export default function Upload() {
 
             <p className="text-sm text-gray-800 mt-1">
               Fill Project Details
-            </p>
+            </p>string
 
             <hr className="border-t border-gray-600 mt-3" />
           </div>
@@ -149,8 +160,8 @@ export default function Upload() {
                 Technical Details
               </label>
 
-              <textarea value={TechnicalDetail}
-              onChange={(e) => SetTechnicalDetail(e.target.value)}
+              <textarea value={TechnicalDetails}
+              onChange={(e) => SetTechnicalDetail(e.target.value as string)}
                 rows={3}
                 placeholder="Enter image description..."
                 className="
@@ -227,13 +238,13 @@ export default function Upload() {
               </ul>
             </div>
 
-              <Input onChange={SetDesignFile} label="Design Concept"/>
+            <Input onChange={SetDesignFile} label="Design Concept"/>
 
-              <Input onChange={SetDrawingFile} label="Drawing"/>
+            <Input onChange={SetDrawingFile} label="Drawing"/>
 
-              <Input onChange={SetProcessFile} label="Process Gallery"/>
+            <Input onChange={SetProcessFile} label="Process Gallery"/>
 
-              <Input onChange={SetVisualizationFile} label="Visualization Gallery"/>
+            <Input onChange={SetVisualizationFile} label="Visualization Gallery"/>
 
             <button className= {`w-full
                 bg-[#c0c0c0]

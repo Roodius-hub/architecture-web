@@ -72,9 +72,10 @@ export const GetURL = async (req:Request, res:Response) => {
 //  put metadata
 export const putData = async (req:Request, res:Response) => {
     try {
+        console.log(req.body)
          const title = req.body.title as string;
-         const OverView = req.body.OverView  as string;
-         const technicaldetails = req.body.technicaldetails as string;
+         const overview = req.body.overview  as string;
+         const technicaldetails = req.body.TechnicalDetails  ;
          const keys = req.body.keys as string[];
          const ProjectFacts = req.body.ProjectFacts as string[]; 
          const time = new Date();
@@ -99,7 +100,7 @@ export const putData = async (req:Request, res:Response) => {
         const post = await prisma.metaData.create({
             data: {
                 Title: title ,
-                overview: OverView,
+                overview: overview,
                 ProjectFacts: ProjectFacts,
                 TechnicalDetails:technicaldetails,
                 keys: keys,
