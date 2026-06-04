@@ -24,10 +24,10 @@ model MetaData {
   id                    Int       @id @default(autoincrement())
   CDN                   String
   Type                  String
-  Title                 String    @unique
+  Title                 String    @unique 
   overview              String
   TechnicalDetails      String
   ProjectFacts          String[]
   keys                  String[]   @unique
-  Time                  DateTime
+  Time                  DateTime?
 }

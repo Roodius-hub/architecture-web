@@ -8,7 +8,7 @@ const router = express.Router();
 router.put("/getURL", GetURL);
 
 //for frontend
-router.put("/put/metadata",putData)
+router.post("/metadata",putData)
 
 router.delete("delete", deleteData);
 

@@ -7,3 +7,11 @@ export interface metaData {
     status:String;
     Duration:String;
 }
+
+
+
+export interface PayloadTypes { 
+    title:string;
+    keys:string[];
+    fileTypes:string[]
+}

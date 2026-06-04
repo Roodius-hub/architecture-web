@@ -1,6 +1,10 @@
+"use client";
+
 import { useState } from "react";
 import Input from "./Input";
-// import { UploadProjectMetaData, UploadProjectsImages } from "../lib/Upload";
+import { UploadProjectMetaData, UploadProjectsImages } from "../lib/Upload";
+import { Spinner } from "./LoadingButton";
+
 // import { metaData } from "../lib/types";
 
 export default function Upload() {
@@ -18,38 +22,54 @@ export default function Upload() {
   const [status, SetStatus] = useState<string>("");
   const [Duration, SetDuration]  = useState<string>("");
 
+  const [save, SetSave ] = useState<boolean>(false);
+  const [upload, SetUpload] = useState<boolean>(false);
+
+  console.log(area , Sitearea, status, Duration);
+  const newForm = new FormData();
   // saving data into formdata
   const handleSave = async () => {
-    const newForm = new FormData();
-    // newForm.append("Title", title);
-    // newForm.append('Overview', overview);
-    // newForm.append('Technical Details', TechnicalDetail);
-    // newForm.append('Area', area);
-    // newForm.append('SiteArea', Sitearea);
-    // newForm.append('status', status);
-    // newForm.append('Duration', Duration);
-
     if (Designfile) {
       newForm.append("DesignFile", Designfile);
+      newForm.append("name", Designfile.name);
+      newForm.append("types", Designfile.type);
     }
 
     if (DrawingFile) {
       newForm.append("DesignFile", DrawingFile);
+      newForm.append("name", DrawingFile.name);
+      newForm.append("type", DrawingFile.type);
     }
 
     if (ProcessFile) {
       newForm.append("ProcessFile", ProcessFile);
+      newForm.append("name", ProcessFile.name);
+      newForm.append("type", ProcessFile.type);
     }
 
     if (VisualizationFile) {
       newForm.append("Visualization", VisualizationFile);
+      newForm.append("name", VisualizationFile  .name);
+      newForm.append("type", VisualizationFile.type);
     }
-    setTimeout(async () => {
-    await UploadProjectsImages(newForm);
-    }, 2000)
-    await UploadProjectMetaData({title, overview, TechnicalDetail, area, Sitearea, status, Duration})
+    console.log(newForm);
+    await new Promise((resolve) => {
+      setTimeout(resolve,3000);
+    })
+    SetSave(true);
   }
 
+  const uploadForm = async () => {
+    try {
+      const response1 = await UploadProjectMetaData({title, overview, TechnicalDetail, area, Sitearea, status, Duration});
+      const response2 = await UploadProjectsImages(newForm, title);
+      console.log(response1);
+      console.log(response2);
+      SetUpload(true)
+    } catch(error) {
+        console.log("Upload Faidled", error);
+    }
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#808080] p-4 font-mono">
@@ -215,8 +235,22 @@ export default function Upload() {
 
               <Input onChange={SetVisualizationFile} label="Visualization Gallery"/>
 
+            <button className= {`w-full
+                bg-[#c0c0c0]
+                py-2
+                font-bold
+                text-black
+                border
+                border-t-white
+                border-l-white
+                border-r-black
+                border-b-black
+                active:border-t-black
+                active:border-l-black
+                active:border-r-white
+                active:border-b-white ${save ? "bg-green-700 text-black cursor-not-allowed":"text-black"}`} onClick={handleSave}>{save ? "Done ✔️" : "Save Details"}</button>
             <button
-              className="
+              className={`
                 w-full
                 bg-[#c0c0c0]
                 py-2
@@ -230,12 +264,12 @@ export default function Upload() {
                 active:border-t-black
                 active:border-l-black
                 active:border-r-white
-                active:border-b-white
-              "
+                active:border-b-white ${upload ? "bg-green-700 text-black" : "text-black"}`}
+                onClick={uploadForm}
              >
-              Upload
+              {upload ? "Done ✔️" : "Upload"}
             </button>
-
+            
             <div className="text-center text-xs text-gray-700 mt-3">
               Retro Image Uploader v1.0
             </div>

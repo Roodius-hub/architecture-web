@@ -43,8 +43,9 @@ export const loginAndSignUp = async (req:Request,res:Response) => {
         },
     });
 
+
 // PresignedUrl 
-export const GetURL = async (req:Request, res:Response, next:NextFunction) => {
+export const GetURL = async (req:Request, res:Response) => {
     const keys = req.body.keys as string[];
     const title = req.body.title as string;
     const fileTypes  = req.body.fileTypes as string[];
@@ -52,19 +53,20 @@ export const GetURL = async (req:Request, res:Response, next:NextFunction) => {
     const urls = await Promise.all(
         keys.map(async (key, index) => {
             const extension = key.split(".").pop();
+            const Imagekey = `${title}/${randomUUID()}.${extension}`;
             const command = new PutObjectCommand({
                 Bucket: 'roodi-archi',
-                Key: `${title}/${randomUUID()}.${extension}`,
+                Key: Imagekey,
                 ContentType: fileTypes[index],
         });
         
-        const url = await getSignedUrl(s3clinet, command, {expiresIn: 60})
-        return url;
+        const url = await getSignedUrl(s3clinet, command, {expiresIn: 120})
+        return {url, Imagekey};
         // console.log(error);
     })
     )
-    res.status(200).json({AllSignedURL:urls,Allkeys:keys,AllfileTypes:fileTypes})
-    res.status(500).json({msg:"Error While Generating"})
+    res.status(200).json({urls})
+    // res.status(500).json({msg:"Error While Generating"})
 }
 
 //  put metadata
@@ -72,7 +74,7 @@ export const putData = async (req:Request, res:Response) => {
     try {
          const title = req.body.title as string;
          const OverView = req.body.OverView  as string;
-         const technicaldetails = req.body.echnicaldetails as string;
+         const technicaldetails = req.body.technicaldetails as string;
          const keys = req.body.keys as string[];
          const ProjectFacts = req.body.ProjectFacts as string[]; 
          const time = new Date();
@@ -81,8 +83,8 @@ export const putData = async (req:Request, res:Response) => {
     // checking duplicates
     const duplicate = await prisma.metaData.findMany({
         where:{
-            key: {
-                in: keys
+            keys: {
+                hasSome: keys
             }
         }
     })
@@ -92,17 +94,18 @@ export const putData = async (req:Request, res:Response) => {
     }
 
 
-        const cdn = (process.env.CDN_DOM as string) + title;
+        const cdn = process.env.CDN_DOM as string;
 
         const post = await prisma.metaData.create({
             data: {
-                title: title ,
-                description: OverView,
-                details: technicaldetails, 
+                Title: title ,
+                overview: OverView,
                 ProjectFacts: ProjectFacts,
-                key: keys,
-                time:time,
-                cdn:cdn  
+                TechnicalDetails:technicaldetails,
+                keys: keys,
+                CDN:cdn,
+                Type:"jpg",
+                Time: new Date(),
             }
         });
         return res.status(200).json({"posts":post})
