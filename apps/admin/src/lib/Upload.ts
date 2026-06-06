@@ -41,6 +41,8 @@ export async function UploadProjectMetaData({title, overview, TechnicalDetails, 
         TechnicalDetails:TechnicalDetails,  
         ProjectFacts:ProjectFacts,
         keys:keys
+    }, {
+        withCredentials:true
     })
 
     const jsonData = response.data
@@ -60,7 +62,8 @@ export async function UploadProjectsImages(files:any, title:string) {
            const upload = await axios.put(item.url, files[index], {
                 headers: {
                     "Content-Type" : files[index].type
-                }
+                } , 
+                withCredentials : true
             })
             console.log(upload);
         })

@@ -6,7 +6,7 @@ import { auth } from "../middlewares/admin.middleware.ts";
 // import { LoginLimit } from "../utils/utils.ts";
 const router = express.Router();
 
-router.put('/api/auth' , Auth)
+router.put('/api/auth', Auth)
 
 // for frontend
 router.put("/getURL", auth, GetURL);

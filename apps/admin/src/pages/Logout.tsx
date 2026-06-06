@@ -6,11 +6,16 @@ import { useNavigate } from "react-router-dom"
 
 export const Logout = () => {
     const navigate = useNavigate();
-    const handleLogout = () => {
-        axios.post("http://localhost:3000/admin/logout" , {
-
-        })
+    const handleLogout = async () => {
+        const token = localStorage.getItem("token");
+       const res= await axios.post("http://localhost:3000/admin/logout", {}, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+       })
+       if(res) {
         navigate("/")
+       }
     }   
 
     return (
