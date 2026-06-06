@@ -14,10 +14,9 @@ datasource db {
 
 model Admin {
   id          Int @id @default(autoincrement())
-  email       String?
+  email       String @unique
   password    String 
   LoginAt     DateTime
-  Gmail       String
 }
 
 model MetaData {

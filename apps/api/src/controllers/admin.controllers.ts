@@ -1,38 +1,11 @@
 import { response, type NextFunction, type Request , type Response } from "express";
 import prisma from "../db/db.ts";
-import { AuthOption } from "../auth/auth.ts";
 import { S3Client , PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { filesType, parameterReqTypes } from "../types/types.ts";
 // import { geturl } from "../utils/utils.ts";
 // import axios, { all } from "axios";
 import {randomUUID} from "crypto" 
-
-// login and signup
-export const loginAndSignUp = async (req:Request,res:Response) => {
-    try {
-        const url = `${req.protocol}://${req.get("host")}${req.url}`;
-
-        const init:RequestInit = {
-            method: req.method, 
-            headers: req.headers as any
-        };
-
-        if(req.method !== "GET" && req.method !== "HEAD") {
-            init.body = JSON.stringify(req.body);
-        }
-
-        const fetchReq = new Request(url, init);
-
-        const response = await AuthOption.handler(fetchReq)
-        const body  = await response.text();
-        res.status(response.status).send(body);
-
-    } catch (error) {
-        console.log(error, "Auth error");
-        res.status(500).send("Auth error");
-    }
-}
 
 // client
     const s3clinet = new S3Client({
@@ -135,4 +108,10 @@ export const deleteData = async (req:Request, res:Response, next:NextFunction) =
     } catch(error) {
         console.log(error);
     }
+}
+
+
+export const logout = (req:Request, res:Response) => {
+    res.clearCookie("token");
+    res.status(200).json({message: "Logged out"});
 }

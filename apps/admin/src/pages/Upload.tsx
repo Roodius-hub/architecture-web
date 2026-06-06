@@ -1,11 +1,8 @@
-"use client";
-
 import { useState } from "react";
 import Input from "./Input";
 import { UploadProjectMetaData, UploadProjectsImages } from "../lib/Upload";
-import { Spinner } from "./LoadingButton";
+import { Logout } from "./Logout";
 
-// import { metaData } from "../lib/types";
 
 export default function Upload() {
   const [Designfile, SetDesignFile] = useState<File | null>(null);
@@ -85,8 +82,8 @@ export default function Upload() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#808080] p-4 font-mono">
       <div className="w-full max-w-md border-2 border-black bg-[#c0c0c0] shadow-[6px_6px_0px_#000]">
-
-        {/* Window Header */}
+        <Logout />
+        {/* Window Header */} 
         <div className="bg-[#000080] text-white px-3 py-2 flex justify-between items-center">
           <span className="font-bold">upload.exe</span>
           <span className="border border-white px-2 text-xs">X</span>
@@ -100,7 +97,7 @@ export default function Upload() {
 
             <p className="text-sm text-gray-800 mt-1">
               Fill Project Details
-            </p>string
+            </p>
 
             <hr className="border-t border-gray-600 mt-3" />
           </div>

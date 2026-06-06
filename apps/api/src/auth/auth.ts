@@ -1,33 +1,44 @@
-import {betterAuth} from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
-import "dotenv/config";   
-import db from "../db/db.ts"
+import  bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import db from "../db/db.ts";
+import {secret} from "../config/env.ts"
+import type {Request, Response} from "express";
 
-export const AuthOption = betterAuth({
-    baseURL:process.env.BETTER_AUTH_URL,
-    secret:process.env.BETTER_AUTH_SECRET,
 
-    // database
-    database: prismaAdapter(db, {
-            provider:'postgresql'
-    }), 
+export const Auth = async  (req:Request, res:Response) => {
+    const {email, password } = req.body;
 
-    // email and password 
-    emailAndPassword:{
-        enabled:true
-    },
-
-    // callback for email checking
-    callbacks: {
-        async SignIn({user}:any) {
-            const allowedUser = process.env.ALLOW_USER;
-
-            if(user.email !== allowedUser) {
-                throw new Error("Access restricted to admin only");
+    try {
+        const admin = await  db.admin.findUnique({
+            where: {
+                email:email
             }
+        })
+        if(!admin) {
+         return res.status(401).json({
+        message: "Invalid email"
+                });
+            }
+        const validPassword = await bcrypt.compare(password, admin.password);
+            if (!validPassword) {
+                return res.status(404).json({message:"password is wrong"});
+            }
+        const token  = jwt.sign({email}, secret, {expiresIn:"7d"});
 
-            return true
-        }
+        res.cookie("token",token, {
+            httpOnly:true,
+            sameSite:"lax",
+            secure:false,
+            maxAge:7 * 24 * 60 * 60 * 1000
+        })
+
+        return res.status(200).json({
+            message: "Login successful", 
+            token
+        });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({message: "Internal Error"});
     }
 
-})
+}

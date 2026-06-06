@@ -23,6 +23,8 @@ const GetUrl = async (files:any, title:string) => {
         keys,
         title,
         fileTypes
+    } , {
+        withCredentials:true
     })
     // const jsonData = response.data;
     console.log(response.data)
@@ -48,15 +50,8 @@ export async function UploadProjectMetaData({title, overview, TechnicalDetails, 
 
 export async function UploadProjectsImages(files:any, title:string) {
     const Allurls = (await GetUrl(files, title)).urls;
-    // const files:File[] = [];
+
     const keys : string[] = [];
-    // console.log(Allurls);
-    // All files in Files Array
-    // newForm.forEach((value) => {
-    //     if (value instanceof File) {
-    //         files.push(value);
-    //     }
-    // });
 
     const res = await Promise.all(
         Allurls.map(async (item:any, index:number) => {

@@ -1,24 +1,13 @@
-import { authClient } from "./lib/auth-client";
-import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
-import ImageUploadForm from "./pages/Upload";
+import {Login} from "./pages/Login";
+import { Routes, Route } from "react-router-dom";
+import Upload from "./pages/Upload";
 
 export default function App() {
-  // const { data: session, isPending } =
-  //   authClient.useSession();
-
-  // if (isPending) return <p>Loading...</p>;
-
-  // if (!session) {
-  //   return <Login />;
-  // }
 
   return <>
-  <div>
-    <Dashboard />
-  </div>
-  <div>
-    <ImageUploadForm />
-  </div>
-  </>;
+      <Routes>
+        <Route path="/" element={<Login />}/>
+        <Route path="/upload" element={<Upload />}/>
+      </Routes>
+    </>;
 }

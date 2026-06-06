@@ -1,22 +1,15 @@
-import axios from "axios";
+// import rateLimit from "express-rate-limit";
 
-// generating url
-export const geturl = async () => {
-    const response = await fetch("http://localhost:3001/admin/getURL")
-    const url = await response.json();
-    console.log(url);
-
-    return url
-}
-
-
-// putting file
-// const putting = async () => {
-//     const url = await geturl();
-//     console.log(url);
-
-//     const SendImage = axios.put(url, {
-
-//     })
-
-// }
+// export const LoginLimit = rateLimit({
+//     windowMs: 15 * 60 * 1000, // 15 minutes
+//     max: 5, // Limit each IP to 5 password reset requests per windowMs
+//     message: 'Too many Login attempts, please try again after 15 minutes',
+//     standardHeaders: true,
+//     legacyHeaders: false,
+//     handler: (req, res) => {
+//         res.status(429).json({
+//             message: "To many Request",
+//             retryAfter:900,
+//         })
+//     }
+// })
