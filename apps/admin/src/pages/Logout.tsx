@@ -8,14 +8,15 @@ export const Logout = () => {
     const navigate = useNavigate();
     const handleLogout = async () => {
         const token = localStorage.getItem("token");
-       const res= await axios.post("http://localhost:3000/admin/logout", {}, {
+       const res = await axios.post("http://localhost:3000/admin/logout", {}, {
         headers: {
             Authorization: `Bearer ${token}`
         }
        })
-       if(res) {
-        navigate("/")
+       if(!res) {
+        return false
        }
+       navigate("/")
     }   
 
     return (

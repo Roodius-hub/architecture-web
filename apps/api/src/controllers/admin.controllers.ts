@@ -77,7 +77,6 @@ export const putData = async (req:Request, res:Response) => {
                 ProjectFacts: ProjectFacts,
                 TechnicalDetails:technicaldetails,
                 keys: keys,
-                CDN:cdn,
                 Type:"jpg",
                 Time: new Date(),
             }
@@ -110,8 +109,25 @@ export const deleteData = async (req:Request, res:Response, next:NextFunction) =
     }
 }
 
-
+// logout
 export const logout = (req:Request, res:Response) => {
-    res.clearCookie("token");
+    // res.clearCookie("token");
+    localStorage.removeItem("token");
     res.status(200).json({message: "Logged out"});
+}
+
+export const getData = async (req:Request, res:Response) => {
+    try {
+        const data = await prisma.metaData.findMany({});
+         if (!data) {
+            return res.status(203).json({
+                message:"Somthing Wrong"
+            })
+         }
+    }  catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Internal Server Error"
+        })
+    }
 }

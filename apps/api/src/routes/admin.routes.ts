@@ -1,5 +1,5 @@
 import express from "express";
-import { deleteData, GetURL, logout, putData } from "../controllers/admin.controllers.ts";
+import { deleteData, getData, GetURL, logout, putData } from "../controllers/admin.controllers.ts";
 import {Auth} from "../auth/auth.ts"
 import { toNodeHandler } from "better-auth/node";
 import { auth } from "../middlewares/admin.middleware.ts";
@@ -17,6 +17,10 @@ router.post("/metadata",auth, putData)
 //logout 
 router.post("/logout", auth, logout);
 
+// get data 
+router.get('/projects', getData);
+
+// delete
 router.delete("/delete", auth, deleteData);
 
 

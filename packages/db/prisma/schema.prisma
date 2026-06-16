@@ -21,7 +21,6 @@ model Admin {
 
 model MetaData {
   id                    Int       @id @default(autoincrement())
-  CDN                   String
   Type                  String
   Title                 String    @unique 
   overview              String
