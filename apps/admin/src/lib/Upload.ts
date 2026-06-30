@@ -2,7 +2,7 @@ import axios from "axios";
 import type { metaData } from "./types";
 // import type { PayloadTypes } from "./types";
 // import type { AnyCnameRecord } from "dns";
-const token = localStorage.getItem("token");
+// const token = localStorage.getItem("token");
 
 const GetUrl = async (files:any, title:string) => {
     
@@ -25,9 +25,6 @@ const GetUrl = async (files:any, title:string) => {
         fileTypes
     } , {
         withCredentials:true,
-        headers:{
-            Authorization:`Bearer ${token}`
-        }
     })
     // const jsonData = response.data;
     console.log(response.data)
@@ -46,9 +43,6 @@ export async function UploadProjectMetaData({title, overview, TechnicalDetails, 
         keys:keys
     }, {
         withCredentials:true,
-        headers:{
-            Authorization:`Bearer ${token}`
-        }
     })
 
     const jsonData = response.data
@@ -66,10 +60,6 @@ export async function UploadProjectsImages(files:any, title:string) {
             keys.push(item.Imagekey);
             console.log(item.Imagekey);
            const upload = await axios.put(item.url, files[index], {
-                headers: {
-                    "Content-Type" : files[index].type,
-                     Authorization:`Bearer ${token}`
-                } , 
                 withCredentials : true
             })
             console.log(upload);

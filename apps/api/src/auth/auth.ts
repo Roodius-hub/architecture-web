@@ -23,14 +23,13 @@ export const Auth = async  (req:Request, res:Response) => {
             if (!validPassword) {
                 return res.status(404).json({message:"password is wrong"});
             }
-        const token  = jwt.sign({email}, secret, {expiresIn:"7d"});
+        const token  = jwt.sign({email}, secret);
 
         res.cookie("token",token, {
             httpOnly:true,
             sameSite:"lax",
             path:"/",
             secure:false,
-            maxAge:7 * 24 * 60 * 60 * 1000
         })
 
         return res.status(200).json({

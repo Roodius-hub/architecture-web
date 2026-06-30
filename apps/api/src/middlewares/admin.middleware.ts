@@ -4,28 +4,33 @@ import {secret} from "../config/env.ts";
 
 
 export async function auth(req:Request, res:Response, next:NextFunction) {
-    // console.log(req.headers.token)
-    // console.log(req.cookies);
-        const authorization:string = req.headers.authorization as string;
-        console.log(authorization)
-        //    if (!authHeader) {
-        // return res.status(401).json({
-        //     message: "Unauthorized"
-        // });
-        //  }
-        const token:string = authorization.split(" ")[1] as string;
-        console.log(token)
-        // console.log(secret)
-        try {
-            console.log("Before verify");
-            const decoded = jwt.verify(token, secret);
-            console.log("After verify");
-            console.log(jwt.decode(decoded));
-            req.user = decoded;
-            next();
-        } catch(error){ 
+    try {
+        console.log("Cookies:", req.cookies);
+        const token = req.cookies.token;
+        console.log("Token:", token);
+
+        if (!token) {
             return res.status(401).json({
+                message: "Authorization header missing"
+            });
+        }
+
+        // const token = authorization.split(" ")[1];
+
+        console.log("Before verify");
+        const decoded = jwt.verify(token, secret);
+        // const decoded = jwt.decode(token);
+        console.log("After verify");
+        console.log(decoded);
+
+        req.user = decoded;
+
+        next();
+    } catch (error) {
+        console.error(error);
+
+        return res.status(401).json({
             message: "Invalid token"
         });
-        }
+    }
 }

@@ -112,7 +112,13 @@ export const deleteData = async (req:Request, res:Response, next:NextFunction) =
 // logout
 export const logout = (req:Request, res:Response) => {
     // res.clearCookie("token");
-    localStorage.removeItem("token");
+    // localStorage.removeItem("token");
+     res.clearCookie("token", {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: false,
+    });
     res.status(200).json({message: "Logged out"});
 }
 
