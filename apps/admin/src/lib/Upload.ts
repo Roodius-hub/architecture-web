@@ -60,7 +60,11 @@ export async function UploadProjectsImages(files:any, title:string) {
             keys.push(item.Imagekey);
             console.log(item.Imagekey);
            const upload = await axios.put(item.url, files[index], {
+                        headers: {
+                "Content-Type": files[index].type,
+            },
                 withCredentials : true
+                
             })
             console.log(upload);
         })

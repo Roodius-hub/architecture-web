@@ -1,42 +1,38 @@
-
+const CDN_DOM = "d1z1e76yk7p645.cloudfront.net";
 
 export function Card({
-  title,
-  description,
-  cdn
+  Title,
+  overview,
+  TechnicalDetails,
+  ProjectFacts,
+  Allkeys,
 }: {
-  title: string;
-  description:string;
-  cdn:string;
+  Title: string;
+  overview: string;
+  TechnicalDetails: string;
+  ProjectFacts: string[];
+  Allkeys: string[];
 }) {
   return (
-    <div className="group cursor-pointer">
+    <div className="group w-[350px] rounded-2xl border hover:border-purple-700  overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-300">
 
-  <div className="overflow-hidden rounded-2xl">
-    <img
-      src={cdn}
-      width={600}
-      height={800}
-      className=" rounded-xl
-        object-cover
-      "
-      alt=""
-    />
-  </div>
+      <div className="h-[260px] overflow-hidden">
+        <img
+          src={`https://${CDN_DOM}/${Allkeys[0]}`}
+          alt={Title}
+          className="w-full h-full object-cover  transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
 
-  <div className="mt-5 flex justify-between items-start">
-    
-    <div>
-      <h3 className="text-2xl font-semibold text-black">
-        {title}
-      </h3>
-
-      <p className="text-purple-700 text-sm mt-1">
-        - {description}
-      </p>
+      <div className="p-4 space-y-2 flex flex-col ">
+        <h3 className="block text-gray-600 text-xl font-semibold line-clamp-1">
+          {Title} 
+        </h3>
+        
+        <p className="block text-gray-600 text-[10px] leading-6 line-clamp-2">
+          {overview}  
+        </p>
+      </div>
     </div>
-
-  </div>
-</div>
   );
 }

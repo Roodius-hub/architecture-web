@@ -18,7 +18,7 @@ export  async function ProjectDetails({id}) {
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center justify-center border-2 border-black rounded-lg p-2"
         >
-          <img src={project.cdn} className="h-120 w-5xl flex items-center justify-center bg-gray-100 rounded-md" />
+          {/* <img src={} className="h-120 w-5xl flex items-center justify-center bg-gray-100 rounded-md" /> */}
         </motion.div>
 
         {/* Project Details */}

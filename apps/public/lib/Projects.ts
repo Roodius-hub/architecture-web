@@ -30,3 +30,9 @@ export const projects = [
     cdn: "https://d1z1e76yk7p645.cloudfront.net/25445.jpg",
   }
 ];
+
+import axios from "axios";
+import { useEffect } from "react";
+
+
+
