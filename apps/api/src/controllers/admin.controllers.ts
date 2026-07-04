@@ -140,3 +140,29 @@ export const getData = async (req:Request, res:Response) => {
         })
     }
 }
+
+
+export const UniqueProject = async (req:Request, res:Response) => {
+    const id = Number(req.params.id);
+
+    try {   
+        const project = await prisma.metaData.findUnique({
+            where: {
+                id:id
+            }
+        })
+          if (!project) {
+      return res.status(404).json({
+        message: "Project not found",
+      });
+    }
+       return res.status(200).json({
+            project
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message:"Internal Error"
+        })
+    }
+}
