@@ -33,7 +33,7 @@ export  function ProjectDetails({id}) {
           Residential Architecture
         </p>
 
-        <h1 className="text-4xl md:text-7xl font-ibm font-bold mt-4">
+        <h1 className="text-3xl md:text-5xl font-ibm font-bold mt-4">
           {data.Title}
         </h1>
 
