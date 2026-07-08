@@ -46,8 +46,9 @@ export default function About(){
 
     {/* Tag */}
     <div className="mb-10 inline-block border border-green-700 px-6 py-2">
-      <p className="text-xs uppercase tracking-[0.4em] text-green-700">
-       Institutional Architecture , Educational Architecture , Healthcare Architecture
+      <p className="text-xs uppercase tracking-[0.3em] text-green-700">
+       Institutional Architecture,<br /> 
+       <span>Educational Architecture,</span>  Healthcare Architecture
       </p>
     </div>
 
@@ -65,7 +66,7 @@ export default function About(){
     {/* Tag */}
     <div className="mb-10 inline-block border border-green-700 px-6 py-2">
       <p className="text-xs uppercase tracking-[0.4em] text-green-700">
-        Complete Many Residential Architecture
+        Completed Many Residential Architecture
       </p>
     </div>
 

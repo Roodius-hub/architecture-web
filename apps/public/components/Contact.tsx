@@ -91,7 +91,7 @@ export default function Contact() {
           Your Space
         </h1>
 
-        <p className="mt-8 max-w-md text-lg leading-relaxed text-neutral-700">
+        <p className="mt-8 max-w-md text-sm leading-relaxed  text-neutral-700">
           Residential architecture, luxury elevations, interiors,
           and modern living spaces crafted with timeless aesthetics.
         </p>

@@ -2,6 +2,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ProgressCard from "../ProgressCard";
+import { useAtom } from "jotai";
+import { isDarkAtom } from "@/lib/Theme";
 
 export default function AnimatedHero() {
     const titleRef = useRef<HTMLHeadingElement>(null);
@@ -40,7 +42,7 @@ export default function AnimatedHero() {
     
     {/* TEXT -> LEFT SIDE */}
     <div>
-      <p className="tracking-[0.3em]  text-sm font-semibold mb-4 ml-3">
+      <p className="tracking-[0.3em]  text-sm font-semibold mb-4 ml-3 dark:text-white">
         IMAGINERING ARCHITECTURE
       </p>
 
