@@ -14,7 +14,7 @@ export function Card({
   Allkeys: string[];
 }) {
   return (
-    <div className="group w-[350px] rounded-2xl border hover:border-purple-700  overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-300">
+    <div className="group w-[350px] rounded-2xl border hover:border-purple-700 dark:bg-[#2b2b2b] overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-300">
 
       <div className="h-[260px] overflow-hidden">
         <img
@@ -25,11 +25,11 @@ export function Card({
       </div>
 
       <div className="p-4 space-y-2 flex flex-col ">
-        <h3 className="block text-gray-600 text-xl font-semibold line-clamp-1">
+        <h3 className="block text-gray-600 text-xl font-semibold line-clamp-1 dark:text-white dark:font-light">
           {Title} 
         </h3>
         
-        <p className="block text-gray-600 text-[10px] leading-6 line-clamp-2">
+        <p className="block text-gray-600 text-[10px] leading-6 line-clamp-2 dark:text-white">
           {overview}  
         </p>
       </div>

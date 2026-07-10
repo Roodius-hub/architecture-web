@@ -40,7 +40,7 @@ export default function   Logo() {
   }, []);
 
   return ( <div className="flex items-center justify-center">
-    <div className="w-[60px]">
+    <div className="w-[60px] dark:shadow-purple-400">
         <img src="./Archi_Logo.png" alt="" />
       </div>
  <div className="flex flex-col leading-none items-center justify-center">

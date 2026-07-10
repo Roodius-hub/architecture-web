@@ -5,6 +5,7 @@ import { Controller, Form, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import * as z from "zod"
 import { Button } from "@/components/ui/button"
+import axios from "axios";
 import {
   Card,
   CardContent,
@@ -29,15 +30,15 @@ import {
 } from "@/components/ui/input-group"
 
 const formSchema = z.object({
-  Name: z
+  name: z
     .string()
     .min(5, "Name must be at least 5 characters.")
     .max(32, "Name must be at most 32 characters."),
-  Email: z
+  email: z
     .string().email()
     .min(20, "email must be at least 20 characters.")
     .max(100, "email must be at most 100 characters."),
-    Number: z
+    number: z
     .number()
     .min(10, "Number must be at least 10 characters.")
     .max(10, "Number must be at most 10 characters."),
@@ -51,14 +52,14 @@ export default function Contact() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      Name: "",
-      Email: "",
-      Number: 0,
+      name: "",
+      email: "",
+      number: 0,
       description: "",
     },
   })
   
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     toast("You submitted the following values:", {
       description: (
         <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
@@ -73,9 +74,15 @@ export default function Contact() {
         "--border-radius": "calc(var(--radius)  + 4px)",
       } as React.CSSProperties,
     })
+
+    try { 
+        await axios.post("http:localhost:3000/admin/message", data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-    return <section id="contact" className="min-h-screen my-3 rounded-2xl bg-[#f5f1ea] px-6 py-20 text-black">
+    return <section id="contact" className="min-h-screen my-3 rounded-2xl bg-[#f5f1ea] px-6 py-20 text-black dark:bg-[#161616]">
   <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-2">
 
     {/* Left Side */}
@@ -85,13 +92,13 @@ export default function Contact() {
           Contact Us
         </p>
 
-        <h1 className="font-bowlby text-6xl uppercase leading-none md:text-8xl">
+        <h1 className="font-bowlby text-6xl uppercase leading-none md:text-8xl dark:text-white">
           Let’s Build
           <br />
           Your Space
         </h1>
 
-        <p className="mt-8 max-w-md text-sm leading-relaxed  text-neutral-700">
+        <p className="mt-8 max-w-md text-sm leading-relaxed  text-neutral-700 dark:text-neutral-500">
           Residential architecture, luxury elevations, interiors,
           and modern living spaces crafted with timeless aesthetics.
         </p>
@@ -115,7 +122,7 @@ export default function Contact() {
         >
           <FieldGroup>
             <Controller
-              name="Name"
+              name="name"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -123,7 +130,7 @@ export default function Contact() {
 
                   <Input
                     {...field}
-                    placeholder="Your Name"
+                    placeholder="Your Name" onChange={(e) => setName(e.target.value)}
                   />
 
                   {fieldState.error && (
@@ -134,7 +141,7 @@ export default function Contact() {
             />
 
             <Controller
-              name="Email"
+              name="email"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -152,11 +159,11 @@ export default function Contact() {
             />
 
               <Controller
-              name="Number"
+              name="number"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel>Number</FieldLabel>
+                  <FieldLabel>Phone</FieldLabel>
 
                   <Input
                     placeholder="Phone Number"
@@ -216,7 +223,7 @@ export default function Contact() {
           Reset
         </Button>
 
-        <Button type="submit" form="form-rhf-demo">
+        <Button type="submit" form="form-rhf-demo" className={"dark:bg-purple-700"}>
           Submit
         </Button>
       </CardFooter>

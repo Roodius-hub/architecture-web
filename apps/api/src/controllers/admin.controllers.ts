@@ -166,3 +166,33 @@ export const UniqueProject = async (req:Request, res:Response) => {
         })
     }
 }
+
+// message
+export const message = async (req:Request, res:Response) => {
+    const { name, email, number, description } = req.body;
+
+
+    if(!name && !email && !number && !message) {
+        return res.json({message:"data not found"})
+    }
+    try {
+            const data = await prisma.Message.create({
+                data: {
+                    Name:name,
+                    Email:email,
+                    Phone:number,
+                    Message:description
+                }
+            })
+            console.log(data)
+            res.status(200).json({
+                message:"Message Sended"
+            })
+    } catch(error) {
+        console.log(error)
+        res.status(500).json({
+            message:"Internal Error"
+        })
+    }
+
+}

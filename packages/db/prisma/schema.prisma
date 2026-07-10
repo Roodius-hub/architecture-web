@@ -29,3 +29,12 @@ model MetaData {
   keys                  String[]   @unique
   Time                  DateTime?
 }
+
+model Message {
+  id    String  @id @default(uuid())
+  Name  String
+  Email String
+  Phone String
+  Message  String
+  CreatedAt DateTime @default(now())
+}

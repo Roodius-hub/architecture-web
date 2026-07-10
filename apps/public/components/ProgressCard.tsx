@@ -11,7 +11,7 @@ export default function ProgressCard({
     <div className="relative pl-16">
       
       {/* timeline dot */}
-      <div className="absolute left-[18px] top-10 w-4 h-4 rounded-full bg-black" />
+      <div className="absolute left-[17px] top-10 w-4 h-4 rounded-full bg-black dark:bg-[#f7f3eb]" />
 
       <p className="text-xs tracking-[0.3em] mb-3">
         {number}
@@ -36,10 +36,12 @@ export default function ProgressCard({
         className={`
           relative
           w-[320px]
+          dark:w-[250px]
           bg-white
           p-3
           shadow-xl
-          border border-black/10
+          dark:bg-[#f7f3eb]
+          border border-purple/60
           ${rotate}
         `}
       >
@@ -51,10 +53,10 @@ export default function ProgressCard({
           src={image}
           width={220}
           height={220}
-          className=" object-cover"
+          className="object-center"
         />
 
-        <h3 className="mt-4 text-xl">
+        <h3 className="mt-4 text-xl dark:text-black">
           {title}
         </h3>
       </motion.div>

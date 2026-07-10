@@ -30,7 +30,7 @@ export default function AnimatedCards() {
     },[])
     
 
-    return <div  className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
+    return <div  className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
              {data.map((project, i) => (
             <motion.div  animate={ clicked ? { scale: 0.95, opacity: 0.5,} : {} }

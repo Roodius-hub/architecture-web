@@ -34,7 +34,7 @@ export default function Services() {
   }
 ];
 
-    return <section id="services" className="py-30 -mt-20 bg-[#f7f3eb] rounded-2xl">
+    return <section id="services" className="py-30 -mt-20 bg-[#f7f3eb] rounded-2xl dark:bg-[#161616]">
 
       <div className="max-w-6xl mx-auto px-8">
 
@@ -43,11 +43,11 @@ export default function Services() {
         </p>
 
         <h2 className="text-8xl  font-semibold mb-20 font-bowlby
-                        tracking-tight uppercase leading-none">
+                        tracking-tight uppercase leading-none dark:text-purple-700">
           SERVICES
         </h2>
 
-        <div className="border-t border-black/10">
+        <div className="border-t border-black/10 dark:bg-[#2b2b2b] dark:rounded-2xl">
 
           {services.map((service, index) => {
 
@@ -103,7 +103,7 @@ export default function Services() {
 
                   </div>
 
-                  <span className="mr-3 text-3xl text-black/40">
+                  <span className="mr-3 text-3xl text-black/40 dark:text-white">
                     {isOpen ? "−" : "+"}
                   </span>
 
@@ -136,7 +136,7 @@ export default function Services() {
 
                       <div className="pb-10 pl-24 max-w-3xl">
 
-                        <p className="text-black/60 text-lg leading-relaxed">
+                        <p className="text-black/60 text-lg leading-relaxed dark:text-white">
                           {service.description}
                         </p>
 

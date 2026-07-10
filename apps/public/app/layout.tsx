@@ -57,16 +57,18 @@ export default function RootLayout({
           >              
 <>
   {/* Side lines */}
-  <div className="fixed left-[12%] top-0 h-full w-px bg-stone-200" />
-  <div className="fixed right-[12%] top-0 h-full w-px bg-stone-200" />
+  <div className="fixed left-[12%] top-0 h-full w-px bg-stone-200 dark:bg-stone-700" />
+  <div className="fixed right-[12%] top-0 h-full w-px bg-stone-200 dark:bg-stone-700" />
 
   {/* Left label */}
   <div className="fixed left-6 top-1/2 -translate-y-1/2 -rotate-90 text-xs tracking-[0.6em] text-stone-400">
     ARCHITECTURE
   </div>
-
+    
   {/* Right dots */}
-  <div className="fixed right-0 top-0 h-full w-48 opacity-20">
+  <div className="fixed right-0 top-0 h-full w-48 opacity-20 p-5">
+      <span className="text-xs outline-black">{new Date(Date.now()).toString().substring(0, 21)}</span>
+
     <div className="h-full bg-[radial-gradient(#999_1px,transparent_1px)] [background-size:24px_24px]" />
   </div>
   <div
@@ -78,6 +80,7 @@ export default function RootLayout({
     backgroundPosition: "0 0",
   }}
 />
+
 </>
               <main>
           <ThemeProvider
@@ -89,6 +92,19 @@ export default function RootLayout({
               {children}
           </ThemeProvider>
               </main>
+              <div className="fixed left-0 top-0 h-full w-48 opacity-20">
+  <div className="h-full bg-[radial-gradient(#999_1px,transparent_1px)] [background-size:24px_24px]" />
+</div>
+
+<div
+  className="fixed inset-0 -z-10 opacity-5"
+  style={{
+    backgroundImage: "url('/Archi_Logo.png')",
+    backgroundRepeat: "repeat",
+    backgroundSize: "18px 18px",
+    backgroundPosition: "0 0",
+  }}
+/>
       </body>
     </html>
   );

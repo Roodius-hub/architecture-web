@@ -11,6 +11,7 @@ import {
   PencilRuler,
   Send,
 } from "lucide-react";
+import ToggleMode from "./ToggleMode";
 
 function NavItem({
   icon,
@@ -30,6 +31,8 @@ function NavItem({
       rounded-full
       border border-blue-500
       text-blue-500
+      dark:text-purple-700
+      dark:border-purple-700
       cursor-pointer
       group
       "
@@ -39,6 +42,7 @@ function NavItem({
         className="
         absolute inset-0
         bg-black
+
         origin-left
         scale-x-0
         transition-transform
@@ -57,6 +61,7 @@ function NavItem({
         transition-colors
         duration-500
         group-hover:text-white
+        dark:group-hover:text-white
         "
       >
         {icon}
@@ -80,7 +85,8 @@ export default function Navbar() {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50">
+    <div className="fixed top-0 left-0 w-full z-50 p-5">
+      <div className=""><ToggleMode /></div>
       {/* Navbar */}
       <div
         className="

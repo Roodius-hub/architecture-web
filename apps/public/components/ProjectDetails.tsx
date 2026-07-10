@@ -23,7 +23,7 @@ export  function ProjectDetails({id}) {
   }, [id])
 
   return (
-  <main className="bg-zinc-50 min-h-screen">
+  <main className="bg-zinc-50 min-h-screen dark:bg-[#161616]">
 
     {/* Hero */}
     <section className="max-w-6xl mx-auto px-6 py-20">
@@ -46,7 +46,7 @@ export  function ProjectDetails({id}) {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mt-14 border-black border-2  p-2 rounded-3xl"
+        className="mt-14 border-black border-2  p-2 rounded-3xl dark:dark:border-purple-500"
       >
         <img onClick={() => setSelectedImage(data.keys[0])}
           src={`${process.env.NEXT_PUBLIC_CDN_DOM}/${data.keys?.[0]}`}
@@ -75,20 +75,20 @@ export  function ProjectDetails({id}) {
       <div className="grid lg:grid-cols-3 gap-12 mt-24">
 
         {/* Technical */}
-        <div className="lg:col-span-2 bg-white rounded-3xl shadow-md p-10">
+        <div className="lg:col-span-2 bg-white rounded-3xl shadow-md p-10 dark:bg-[#2b2b2b]">
 
-          <h2 className="text-3xl font-ibm font-bold mb-3">
+          <h2 className="text-3xl font-ibm font-bold mb-3 dark:text-white">
             Technical Details
           </h2>
 
-          <p className="text-gray-700 font-ibm ml-10 leading-9 text-lg">
+          <p className="text-gray-700 font-ibm ml-10 leading-9 text-lg dark:text-gray-300">
             {data.TechnicalDetails}
           </p>
 
         </div>
 
         {/* Facts */}
-        <div className="bg-white rounded-3xl shadow-md p-10">
+        <div className="bg-white rounded-3xl shadow-md p-10 dark:bg-[#2b2b2b]">
 
           <h2 className="text-3xl font-ibm font-bold mb-8">
             Project Facts
@@ -101,7 +101,7 @@ export  function ProjectDetails({id}) {
                 className="flex items-center gap-3 border-b pb-4 last:border-none"
               >
                 <div className="w-2 h-2 rounded-full bg-black" />
-                <span className="font-ibm text-gray-700">{fact}</span>
+                <span className="font-ibm text-gray-700 dark:text-green-500">{fact}</span>
               </div>
             ))}
           </div>
@@ -123,17 +123,17 @@ export  function ProjectDetails({id}) {
           </h3>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-md p-8">
+        <div className="bg-white rounded-3xl shadow-md p-8 dark:bg-[#2b2b2b]">
           <p className="text-sm uppercase tracking-widest font-ibm text-green-500">
             Completed
           </p>
 
-          <h3 className="text-2xl font-ibm mt-4">
+          <h3 className="text-2xl font-ibm mt-4 ">
             {new Date(data.Time).getFullYear()}
           </h3>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-md p-8">
+        <div className="bg-white rounded-3xl shadow-md p-8 dark:bg-[#2b2b2b]">
           <p className="text-sm uppercase tracking-widest font-ibm text-gray-500">
             Format
           </p>

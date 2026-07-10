@@ -34,7 +34,7 @@ export default function AnimatedHero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen pt-20  rounded-2xl  mt-30 bg-[#f7f3eb] w-full">
+    <section className="relative min-h-screen pt-20  rounded-2xl  mt-30 bg-[#f7f3eb]  dark:bg-[#161616] w-full">
   {/* need a bg -> texture overlay */}
   <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.png')]" />
 
@@ -42,7 +42,7 @@ export default function AnimatedHero() {
     
     {/* TEXT -> LEFT SIDE */}
     <div>
-      <p className="tracking-[0.3em]  text-sm font-semibold mb-4 ml-3 dark:text-white">
+      <p className="tracking-[0.3em]  text-sm font-semibold mb-4 ml-3">
         IMAGINERING ARCHITECTURE
       </p>
 
@@ -56,7 +56,7 @@ export default function AnimatedHero() {
               {line1.split("").map((char, i) => (
                 <span
                   key={i}
-                  className="letter inline-block"
+                  className="letter inline-block dark:text-[#f7f3eb]"
                 >
                   {char}
                 </span>
@@ -73,7 +73,7 @@ export default function AnimatedHero() {
               {line2.split("").map((char, i) => (
                 <span
                   key={i}
-                  className="letter inline-block"
+                  className="letter inline-block dark:[-webkit-text-stroke:0.5px_#50a2ff]"
                 >
                   {char}
                 </span>
@@ -82,7 +82,7 @@ export default function AnimatedHero() {
 
           </h1>
 
-      <p className="mt-8 text-black/60 max-w-md">
+      <p className="mt-8 text-black/60 max-w-md text-xs dark:text-[#9CA3AF]">
         Architecture rooted in material, atmosphere,
         and physical experience.
       </p>
@@ -90,7 +90,7 @@ export default function AnimatedHero() {
 
     {/* PICS -> RIGHT SIDE */}
     <div className="relative">
-      <div className="absolute left-6 top-0 bottom-0 w-px bg-black/20" />
+      <div className="absolute left-6 top-0 bottom-0 w-px bg-black/20 dark:bg-[#f7f3eb]" />
 
       <div className="space-y-20">
         <ProgressCard

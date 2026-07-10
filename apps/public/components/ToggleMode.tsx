@@ -12,7 +12,7 @@ export default function ToggleMode() {
   const {theme, setTheme} = useTheme();
   setTheme(isDark);
   return (
-    <Button
+    <Button className={"rounded-2xl dark:hover:bg-[#0f101044] hover:bg-black hover:text-green-500 border-1 border-black dark:hover:text-green-500"}
       variant="outline"
       size="icon"
       onClick={() => setIsDark(isDark === "dark" ? "light" : "dark")}

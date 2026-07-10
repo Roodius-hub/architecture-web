@@ -12,7 +12,6 @@ import ToggleMode from "@/components/ToggleMode";
 export default function Home() {
   return ( <div id="home" className="max-w-6xl mx-auto px-6">
   <div>
-    <ToggleMode />
     <Navbar />
   </div>
     <div>

@@ -9,7 +9,7 @@ export default function Footer() {
 
 
     return (
-        <footer className="bg-black px-6 py-16 text-white rounded-2xl">
+        <footer className="bg-black px-6 py-16 text-white rounded-2xl dark:bg-[#161616]">
   <div className="mx-auto flex max-w-7xl flex-col gap-12 md:flex-row md:items-end md:justify-between">
 
     {/* Left */}

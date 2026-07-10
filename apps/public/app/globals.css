@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+
 @custom-variant dark (&:is(.dark *));
 
 /* h1, h2, .hero-text {
@@ -11,6 +12,8 @@
 @theme {
   --font-bowlby: "Bowlby One", sans-serif;
   --font-roboto: "Roboto", sans-serif;
+   --font-sans: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
 }
 
 @theme inline {
