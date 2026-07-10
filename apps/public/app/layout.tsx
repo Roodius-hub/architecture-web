@@ -3,6 +3,7 @@ import "./globals.css";
 import { JetBrains_Mono } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Toaster } from "sonner";
 const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
 
@@ -90,6 +91,7 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               {children}
+              <Toaster richColors position="bottom-right" />
           </ThemeProvider>
               </main>
               <div className="fixed left-0 top-0 h-full w-48 opacity-20">

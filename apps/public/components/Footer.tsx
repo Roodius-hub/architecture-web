@@ -27,20 +27,20 @@ export default function Footer() {
 
     {/* Right */}
     <div className="space-y-4 text-sm uppercase tracking-[0.2em] text-neutral-400">
-      <p>xyc@studio.com</p>
-      <p>+91 98765 43210</p>
+      <p>manzoorahmad272@gmail.com</p>
+      <p>+91 8171380480</p>
       <p>Uttarakhand, India</p>
 
       <div className="flex gap-6 pt-4">
-        <a href="https://instagram.com" className="flex items-center justify-center gap-1 transition hover:text-purple-600 border border-gray-600 p-2 rounded-2xl text-xs">
+        <a href="https://instagram.com" className="flex items-center justify-center gap-1 transition hover:text-green-500  border border-gray-600 p-2 rounded-2xl text-xs">
          <FaInstagram /> Instagram
         </a>
 
-        <a href="https://facebook.com" className="flex items-center justify-center gap-1 transition hover:text-purple-600 border border-gray-600 p-2 rounded-2xl text-xs">
+        <a href="https://facebook.com" className="flex items-center justify-center gap-1 transition hover:text-green-500 border border-gray-600 p-2 rounded-2xl text-xs">
           <CiFacebook scale={200}/> Facebook
         </a>
 
-        <a href="https://www.linkedin.com/" className="flex items-center justify-center gap-1 transition hover:text-purple-600 border border-gray-600 p-2 rounded-2xl text-xs">
+        <a href="https://www.linkedin.com/" className="flex items-center justify-center gap-1 transition hover:text-green-500 border border-gray-600 p-2 rounded-2xl text-xs">
           <CiLinkedin/> Linkedin
         </a>
       </div>

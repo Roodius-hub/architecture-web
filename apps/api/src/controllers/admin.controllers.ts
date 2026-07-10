@@ -6,6 +6,8 @@ import { filesType, parameterReqTypes } from "../types/types.ts";
 // import { geturl } from "../utils/utils.ts";
 // import axios, { all } from "axios";
 import {randomUUID} from "crypto" 
+import { Resend } from 'resend';
+
 
 // client
     const s3clinet = new S3Client({
@@ -166,11 +168,13 @@ export const UniqueProject = async (req:Request, res:Response) => {
         })
     }
 }
+const resend = new Resend(`${process.env.RESEND_API_KEY}`);
 
 // message
 export const message = async (req:Request, res:Response) => {
     const { name, email, number, description } = req.body;
 
+    console.log(process.env.RESEND_API_KEY)
 
     if(!name && !email && !number && !message) {
         return res.json({message:"data not found"})
@@ -185,7 +189,30 @@ export const message = async (req:Request, res:Response) => {
                 }
             })
             console.log(data)
-            res.status(200).json({
+
+            
+const response = await resend.emails.send({
+  from: "Acme  <onboarding@resend.dev>", // Later replace with your verified domain
+  to: ["delivered@resend.dev"],
+  subject: `New Contact Request from ${name}`,
+  html: `
+    <h2>New Contact Form Submission</h2>
+
+    <p><strong>Name:</strong> ${number}</p>
+
+    <p><strong>Email:</strong> ${email}</p>
+
+    <p><strong>Phone:</strong> ${number}</p>
+
+    <hr />
+
+    <h3>Project Description</h3>
+
+    <p>${description}</p>
+  `,
+});
+    console.log(response);
+           return res.status(200).json({
                 message:"Message Sended"
             })
     } catch(error) {

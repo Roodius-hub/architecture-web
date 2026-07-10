@@ -15,7 +15,7 @@ router.put("/getURL", auth, GetURL);
 router.post("/metadata",auth, putData)
 
 //logout 
-router.post("/logout", logout);
+router.post("/logout", auth,logout);
 
 // get data 
 router.get('/projects', getData);

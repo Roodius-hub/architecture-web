@@ -6,6 +6,9 @@ import { toast } from "sonner"
 import * as z from "zod"
 import { Button } from "@/components/ui/button"
 import axios from "axios";
+import { SlCalender } from "react-icons/sl";
+
+
 import {
   Card,
   CardContent,
@@ -39,14 +42,16 @@ const formSchema = z.object({
     .min(20, "email must be at least 20 characters.")
     .max(100, "email must be at most 100 characters."),
     number: z
-    .number()
+    .string()
     .min(10, "Number must be at least 10 characters.")
     .max(10, "Number must be at most 10 characters."),
     description: z
-    .string().email()
+    .string()
     .min(20, "description must be at least 20 characters.")
     .max(100, "description must be at most 100 characters."),
 })
+
+
 
 export default function Contact() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -54,32 +59,19 @@ export default function Contact() {
     defaultValues: {
       name: "",
       email: "",
-      number: 0,
+      number: "",
       description: "",
     },
   })
   
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    toast("You submitted the following values:", {
-      description: (
-        <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-      position: "bottom-right",
-      classNames: {
-        content: "flex flex-col gap-2",
-      },
-      style: {
-        "--border-radius": "calc(var(--radius)  + 4px)",
-      } as React.CSSProperties,
-    })
+      console.log("onSubmit")
+        const res = await axios.post("http://localhost:3000/admin/message", data);
+        if(res.status == 200) {
+          form.reset()
+             toast.success("Message sent successfully! 💚");
+        }  
 
-    try { 
-        await axios.post("http:localhost:3000/admin/message", data);
-    } catch (error) {
-      console.log(error);
-    }
   }
 
     return <section id="contact" className="min-h-screen my-3 rounded-2xl bg-[#f5f1ea] px-6 py-20 text-black dark:bg-[#161616]">
@@ -117,7 +109,7 @@ export default function Contact() {
       <CardContent>
         <form
           id="form-rhf-demo"
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(onSubmit, (errors) => {console.log("Validation Error",errors)})}
           className="space-y-6"
         >
           <FieldGroup>
@@ -130,7 +122,7 @@ export default function Contact() {
 
                   <Input
                     {...field}
-                    placeholder="Your Name" onChange={(e) => setName(e.target.value)}
+                    placeholder="Your Name"
                   />
 
                   {fieldState.error && (
@@ -147,7 +139,7 @@ export default function Contact() {
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel>Email</FieldLabel>
 
-                  <Input
+                  <Input {...field}
                     placeholder="Email"
                   />
 
@@ -165,7 +157,7 @@ export default function Contact() {
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel>Phone</FieldLabel>
 
-                  <Input
+                  <Input {...field}
                     placeholder="Phone Number"
                   />
 
@@ -223,13 +215,12 @@ export default function Contact() {
           Reset
         </Button>
 
-        <Button type="submit" form="form-rhf-demo" className={"dark:bg-purple-700"}>
+        <button type="submit" form="form-rhf-demo" className={"dark:bg-purple-700 p-1 text-xs bg-green-500"}>
           Submit
-        </Button>
+        </button>
       </CardFooter>
     </Card>
-
-
   </div>
+  <a href="https://topmate.io/signup" target="_blank" className="dark:hover:text-blue-500 rounded-3xl p-2 border w-[250px] hover:text-green-500 transition ease-in-out duration-500 hover:bg-black border-purple-600 text-[10px] ml-1 font-bold dark:text-green-500 flex items-center justify-center gap-2"><SlCalender size={13}/><span>Book a call to discuss your ideas</span></a>
 </section>
 }

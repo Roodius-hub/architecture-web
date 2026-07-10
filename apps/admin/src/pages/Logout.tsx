@@ -9,9 +9,7 @@ export const Logout = () => {
     const handleLogout = async () => {
         const token = localStorage.getItem("token");
        const res = await axios.post("http://localhost:3000/admin/logout", {}, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+            withCredentials:true
        })
        if(!res) {
         return false
